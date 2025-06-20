@@ -6,6 +6,7 @@ import FeaturesSection from '@/Components/Home/FeaturesSection.vue';
 import Gallery from '@/Components/Home/Gallery.vue';
 import Footer from '@/Components/Footer.vue';
 import { Head } from '@inertiajs/vue3';
+import FooterSeaction from '@/Components/Home/FooterSeaction.vue';
 
 const props = defineProps({
   categories: Array,
@@ -26,6 +27,7 @@ const props = defineProps({
     </div>
     <FeaturesSection/>
     <Gallery :products="props.products" />
+    <FooterSeaction />
  
     <Footer />
 </template>

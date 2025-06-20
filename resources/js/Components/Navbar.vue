@@ -40,6 +40,9 @@
         </a>
       <template v-if="$page.props.auth.user">
         <span class="text-gray-700">Hola, {{ $page.props.auth.user.name }}</span>
+        <Link :href="route('logout')" method="post" class="text-emerald-600 border border-emerald-600 px-4 py-2 rounded hover:bg-emerald-600 hover:text-white transition">
+          Cerrar sesión
+        </Link>
       </template>
       <template v-else>
         <a href="/login" class="text-emerald-600 border border-emerald-600 px-4 py-2 rounded hover:bg-emerald-600 hover:text-white transition">
