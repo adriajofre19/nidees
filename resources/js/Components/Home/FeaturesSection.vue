@@ -63,7 +63,7 @@ onUnmounted(() => {
       <div class="text-center mb-16">
         <h2 class="text-3xl font-light mb-4">El Nostre Compromís</h2>
           <div class="flex justify-center items-center max-w-4xl mx-auto mb-6">
-            <span class="text-gray-600 text-center text-xl leading-snug">
+            <span class="text-gray-600 text-center text-lg leading-snug">
               A 
               <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.png" alt="NiDEES logo" />
               recuperem plàstics i materials per crear peces úniques, 
