@@ -8,6 +8,7 @@ class Fire extends Model
 {
     protected $fillable = [
         'name',
+        'horario',
         'date',
         'location',
     ];

@@ -1,72 +1,32 @@
 <script setup>
-    import { Head } from '@inertiajs/vue3';
-    import Navbar from '@/Components/Navbar.vue';
-    import { defineProps } from 'vue';
-    import Footer from '@/Components/Footer.vue';
+import { Head } from '@inertiajs/vue3';
+import Navbar from '@/Components/Navbar.vue';
+import Footer from '@/Components/Footer.vue';
+import { defineProps } from 'vue'
+import HeaderSection from '@/Components/Nosotros/HeaderSection.vue';
+import FiresSection from '@/Components/Nosotros/FiresSection.vue';
 
-    const props = defineProps({
-        fires: Array
-    });
+const props = defineProps({
+    fires: Array
+});
 
-    console.log(props.fires);
 </script>
+
 <template>
-    <Navbar />
-    <Head title="Nosotros" />
-    <!-- resources/js/Components/AboutUs.vue -->
-
-  <div class="bg-white py-16">
-    <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h2 class="text-3xl font-bold">La Nostre Aventura</h2>
-        <p class="font-bold mb-4">Una passió, una família, una idea que ha crescut amb sentit.</p>
-        <p class="text-gray-700 mb-4">
-          Tot va començar amb la nostra passió per descobrir món.
-En cada viatge, tornàvem amb les butxaques plenes de plàstics
-amb tipografies i caràcters que ens cridaven l’atenció.
-Potser té a veure amb el fet que vaig estudiar disseny gràfic.
-Els guardàvem pensant: “Un dia en farem alguna cosa”. No volíem
-llençar-los. Sabíem que, d’alguna manera, tenien valor.
-Amb el temps, la vida ens va portar per camins nous. Amb
-l’arribada de la nostra petita Fiera, vam decidir que deixava la
-feina per dedicar-li el temps que es mereixia. Entre jocs, rialles,
-descobertes i molta creativitat compartida, vam continuar
-experimentant plegats.
-        </p>
-        <p class="text-gray-700 mb-4">
-          Un dia vam obrir l’armari de les bosses… i gairebé ens enterren!
-Aquell va ser un punt d’inflexió. Vam començar a jugar, fondre,
-provar textures i donar forma a peces úniques. Les primeres les
-fèiem servir nosaltres, familiars i amics: bosses, fundes, estoigs...
-funcionals i plenes de color.
-        </p>
-        <p class="text-gray-700">
-          Fins que un dia, el meu company va ensenyar una de les
-creacions a un senyor que feia fires. “Ho regales?”, li va
-preguntar. I allò va encendre la flama. El meu company va agafar
-les regnes de l’organització, les fires i la logística.
-I així va néixer l’aventura de nidees: un projecte familiar, fet
-amb les mans, el cor i la convicció de crear un món més
-sostenible.
-        </p>
-      </div>
-      <div>
-        <img src="/images/tienda.png" alt="Parada de productes NiDEES" class="rounded-lg shadow-lg" />
-      </div>
-    </div>
-
-    <div class="bg-gray-50 mt-20 py-16">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-2xl mb-8">Ens Trobaràs a les Fires</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <img src="/images/fira2.jpg" alt="Fira 1" class="rounded-lg shadow-md" />
-          <img src="/images/fira3.jpg" alt="Fira 2" class="rounded-lg shadow-md" />
-          <img src="/images/fira1.jpg" alt="Fira 3" class="rounded-lg shadow-md" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-    <Footer />
+  <Navbar />
+  <Head title="Nosaltres" />
+  <HeaderSection />
+  <FiresSection :fires="props.fires" />
+  <Footer />
 </template>
+
+
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+</style>

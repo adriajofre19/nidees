@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/nosotros', [FiraController::class, 'index'])->name('nosotros.index');
+Route::post('/nosotros', [FiraController::class, 'store'])->name('fires.store');
+Route::delete('/nosotros/{fire}', [FiraController::class, 'destroy'])->name('fires.destroy');
+
 
 
 require __DIR__.'/auth.php';
