@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +25,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+
+        Inertia::share([
+    'auth' => fn () => [
+        'user' => Auth::user(),
+    ],
+    'cartCount' => function () {
+        if (Auth::check()) {
+            return Auth::user()->cartItems()->sum('quantity');
+        }
+        return 0;
+    },
+]);
     }
 }

@@ -1,23 +1,22 @@
 <template>
-  <div class="max-w-6xl mx-auto py-10">
+  <div class="max-w-6xl mx-auto py-10 px-4">
     <h2 class="text-2xl font-bold mb-6">Productes destacats</h2>
     <div>
       <template v-for="(row, rowIndex) in rows" :key="rowIndex">
         <div
           :class="[
-            'flex gap-4 mb-4',
+            'flex flex-wrap gap-4 mb-4',
             row.length === 1 ? 'justify-center' : '',
             row.length === 2 ? 'justify-center' : '',
             row.length === 3 ? 'justify-between' : ''
           ]"
         >
-          <div
+          <Link :href="route('product.show', product.slug)"
             v-for="product in row"
             :key="product.id"
-            class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition flex-1"
-            :style="{ maxWidth: row.length === 1 ? '33%' : row.length === 2 ? '33%' : '33%' }"
+            class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition flex-1 basis-full sm:basis-[48%] md:basis-[30%] max-w-full sm:max-w-[48%] md:max-w-[32%]"
           >
-            <div class="w-full h-64 flex items-center justify-center bg-gray-100">
+            <div class="w-full aspect-[4/3] flex items-center justify-center bg-gray-100">
               <img
                 v-if="product.images[0]"
                 :src="`/storage/${product.images[0].path}`"
@@ -33,15 +32,17 @@
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </template>
     </div>
   </div>
 </template>
 
+
 <script setup>
 import { computed } from 'vue'
+import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
   products: {

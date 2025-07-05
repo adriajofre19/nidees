@@ -81,6 +81,23 @@ class ProductController extends Controller
         ]);
     }
 
+    public function product(Product $product)
+    {
+        $product->load(['category', 'images']); // Cargar relaciones
+
+        // Obtener los productos de la misma categoría, excluyendo el actual
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->with('images')
+            ->get();
+
+
+        return Inertia::render('Shop/Show', [
+            'product' => $product,
+            'relatedProducts' => $relatedProducts,
+        ]);
+    }
+
     public function update(Request $request, Product $product)
 {
     $request->validate([

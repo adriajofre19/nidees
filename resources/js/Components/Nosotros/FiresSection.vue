@@ -175,7 +175,7 @@ function deleteFira(id) {
               <button
                 v-if="$page.props.auth.user && $page.props.auth.user.role === 'admin'"
                 @click="deleteFira(fira.id)"
-                class="mt-4 px-3 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700 transition"
+                class="mt-4 px-3 py-1 bg-red-600 text-white text-md rounded hover:bg-red-700 transition"
               >
                 Elimina
               </button>

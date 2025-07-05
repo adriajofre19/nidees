@@ -30,4 +30,11 @@ class Product extends Model
     return $this->hasMany(ProductImage::class);
 }
 
+    // Product.php
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+
 }

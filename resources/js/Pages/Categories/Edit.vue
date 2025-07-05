@@ -69,7 +69,7 @@ function submit() {
           <p v-if="errors.name" class="text-sm text-red-500 mt-1">{{ errors.name }}</p>
         </div>
 
-        <div>
+        <div class="hidden">
           <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
           <input
             id="slug"

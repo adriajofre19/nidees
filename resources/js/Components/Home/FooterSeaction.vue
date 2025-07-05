@@ -1,7 +1,7 @@
 <template>
   <section
-    class="relative w-full min-h-[600px] flex flex-col items-center justify-start bg-cover bg-center"
-    style="background-image: url('/images/footer-bg.jpg');"
+    class="relative w-full min-h-[1400px] flex flex-col items-center justify-start bg-cover bg-center"
+    style="background-image: url('/images/bags.png');"
   >
     <!-- Text central -->
     <div class="pt-16 pb-8 text-center z-10">

@@ -43,7 +43,7 @@ function removeImage(imageId) {
 
 function submit() {
   processing.value = true
-  form.post(route('products.update', props.product.id), {
+  form.post(route('products.update', props.product.slug), {
     forceFormData: true,
     preserveScroll: true,
     onError: (err) => {

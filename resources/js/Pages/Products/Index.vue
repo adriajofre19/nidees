@@ -60,7 +60,7 @@ function deleteproducts(id) {
         <div class="h-56 overflow-hidden rounded-t-xl">
           <img
             v-if="products.images[0]"
-            :src="`/storage/${products.images[1].path}`"
+            :src="`/storage/${products.images[0].path}`"
             alt="Imatge de la categoria"
             class="object-cover w-full h-full"
           />
@@ -75,14 +75,14 @@ function deleteproducts(id) {
 
           <div class="flex justify-end gap-3">
             <Link
-              :href="route('products.edit', products.id)"
+              :href="route('products.edit', products.slug)"
               class="inline-flex items-center gap-2 bg-black text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-800 transition"
             >
               <Pencil class="w-4 h-4" />
               Editar
           </Link>
             <button
-              @click="deleteproducts(products.id)"
+              @click="deleteproducts(products.slug)"
               class="inline-flex items-center gap-2 bg-red-500 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-red-600 transition"
             >
               <Trash2 class="w-4 h-4" />

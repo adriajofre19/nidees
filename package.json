@@ -21,6 +21,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@stripe/stripe-js": "^7.4.0",
         "@tiptap/extension-heading": "^2.14.0",
         "@tiptap/extension-link": "^2.14.0",
         "@tiptap/extension-text-align": "^2.14.0",
