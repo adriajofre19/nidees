@@ -25,7 +25,7 @@ const form = useForm({
 
 const errors = ref({})
 const processing = ref(false)
-const previewImage = ref(props.category.image ? `/storage/${props.category.image}` : null)
+const previewImage = ref(props.category.image ? `/public/${props.category.image}` : null)
 
 function handleImage(e) {
   const file = e.target.files[0]

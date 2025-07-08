@@ -138,7 +138,7 @@
                 <img
                   v-for="(img, idx) in related.images"
                   :key="img.id || idx"
-                  :src="`/storage/${img.path}`"
+                  :src="`/public/${img.path}`"
                   :alt="related.name"
                   class="object-cover w-full h-full absolute inset-0 transition-opacity duration-500"
                   :style="{ opacity: (activeImageIndexes[related.id] || 0) === idx ? 1 : 0 }"
@@ -206,7 +206,7 @@ const props = defineProps({
 })
 
 // Estados reactivos
-const images = props.product.images?.map(img => `/storage/${img.path}`) || []
+const images = props.product.images?.map(img => `/public/${img.path}`) || []
 const selectedImage = ref(images[0] || '/placeholder.jpg')
 const currentImageIndex = ref(0)
 const isAddingToCart = ref(false)

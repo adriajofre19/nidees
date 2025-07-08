@@ -258,7 +258,7 @@ const t = (key) => translations[currentLang.value][key]
         >
           <div
             class="relative w-full h-80 flex items-end overflow-hidden bg-cover bg-center"
-            :style="fira.image ? `background-image: url('/storage/${fira.image}')` : 'background-color: #111827;'"
+            :style="fira.image ? `background-image: url('/public/${fira.image}')` : 'background-color: #111827;'"
           >
             <div class="fire-overlay absolute inset-0 bg-gray-900 bg-opacity-70 transition-all duration-300"></div>
             

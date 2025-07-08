@@ -39,7 +39,10 @@ class CategoryController extends Controller
         // Guardar la imatge si existeix
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/categories'), $imageName);
+            $imagePath = 'images/categories/' . $imageName;
         }
 
         $category = Category::create([

@@ -59,7 +59,7 @@ function deleteCategory(id) {
         <div class="h-56 overflow-hidden rounded-t-xl">
           <img
             v-if="category.image"
-            :src="`/storage/${category.image}`"
+            :src="`/public/${category.image}`"
             alt="Imatge de la categoria"
             class="object-cover w-full h-full"
           />

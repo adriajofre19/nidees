@@ -19,7 +19,7 @@ const form = useForm({
 
 const errors = ref({})
 const processing = ref(false)
-const previewImage = ref(form.image ? `/storage/${form.image}` : null)
+const previewImage = ref(form.image ? `/public/${form.image}` : null)
 
 function handleImage(e) {
   const file = e.target.files[0]

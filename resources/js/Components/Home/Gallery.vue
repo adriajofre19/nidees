@@ -18,7 +18,7 @@
             <div class="w-full aspect-[4/3] flex items-center justify-center bg-gray-100">
               <img
                 v-if="product.images[0]"
-                :src="`/storage/${product.images[0].path}`"
+                :src="`/public/${product.images[0].path}`"
                 :alt="product.name"
                 class="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-60"
               />

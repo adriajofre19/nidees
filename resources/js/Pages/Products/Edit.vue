@@ -128,7 +128,7 @@ function submit() {
               :key="image.id"
               class="relative w-32 h-32 rounded overflow-hidden border"
             >
-              <img :src="`/storage/${image.path}`" class="object-cover w-full h-full" />
+              <img :src="`/public/${image.path}`" class="object-cover w-full h-full" />
               <button
                 type="button"
                 @click="removeImage(image.id)"

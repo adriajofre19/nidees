@@ -60,7 +60,7 @@ function deleteproducts(id) {
         <div class="h-56 overflow-hidden rounded-t-xl">
           <img
             v-if="products.images[0]"
-            :src="`/storage/${products.images[0].path}`"
+            :src="`/public/${products.images[0].path}`"
             alt="Imatge de la categoria"
             class="object-cover w-full h-full"
           />

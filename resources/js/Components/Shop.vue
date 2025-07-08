@@ -48,7 +48,7 @@
                 <img
                   v-for="(img, idx) in product.images"
                   :key="img.id || idx"
-                  :src="`/storage/${img.path}`"
+                  :src="`/public/${img.path}`"
                   :alt="product.name"
                   class="object-cover w-full h-full absolute inset-0 transition-opacity duration-500"
                   :style="{ opacity: (activeImageIndexes[product.id] || 0) === idx ? 1 : 0 }"
