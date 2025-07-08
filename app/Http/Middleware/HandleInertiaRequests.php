@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Lang;
+use Inertia\Inertia;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -34,6 +37,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'translations' => Lang::get('navigation'),
         ];
     }
 }

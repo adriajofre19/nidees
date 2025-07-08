@@ -13,18 +13,40 @@ const props = defineProps({
   products: Array,
 });
 
-
+const pathParts = window.location.pathname.split('/')
+const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
 
 </script>
 
 <template>
-  <Head title="Inicio" />
+  <Head :title="currentLang === 'ca' ? 'Inici' : currentLang === 'en' ? 'Home' : 'Inicio'" />
     <Navbar />
-    <HeaderSection />
-    <div class="flex flex-col items-center justify-center text-center p-8">
-      <span class="text-2xl">Disseny sostenible amb <span class="font-bold">plàstics reciclats.</span> <br>
-      Peçes úniques fetes a mà, combinant art i funcionalitat.</span>
+    
+    <HeaderSection  />
+    <!-- Español -->
+    <div v-if="currentLang === 'es'" class="flex flex-col items-center justify-center text-center p-8">
+      <span class="text-2xl">
+        Diseño sostenible con <strong>plásticos reciclados.</strong> <br>
+        Piezas únicas hechas a mano, combinando arte y funcionalidad.
+      </span>
     </div>
+
+    <!-- Catalán -->
+    <div v-if="currentLang === 'ca'" class="flex flex-col items-center justify-center text-center p-8">
+      <span class="text-2xl">
+        Disseny sostenible amb <strong>plàstics reciclats.</strong> <br>
+        Peçes úniques fetes a mà, combinant art i funcionalitat.
+      </span>
+    </div>
+
+    <!-- Inglés -->
+    <div v-if="currentLang === 'en'" class="flex flex-col items-center justify-center text-center p-8">
+      <span class="text-2xl">
+        Sustainable design with <strong>recycled plastics.</strong> <br>
+        Unique handmade pieces, combining art and functionality.
+      </span>
+    </div>
+
     <FeaturesSection/>
     <Gallery :products="props.products" />
     <FooterSeaction />

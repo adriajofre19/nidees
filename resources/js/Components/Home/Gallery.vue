@@ -1,6 +1,5 @@
 <template>
   <div class="max-w-6xl mx-auto py-10 px-4">
-    <h2 class="text-2xl font-bold mb-6">Productes destacats</h2>
     <div>
       <template v-for="(row, rowIndex) in rows" :key="rowIndex">
         <div

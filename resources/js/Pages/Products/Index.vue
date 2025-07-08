@@ -27,7 +27,7 @@ function deleteproducts(id) {
 
 <template class="bg-gray-50 min-h-screen">
   <Navbar />
-  <div class="max-w-7xl mx-auto px-6 py-10  min-h-screen">
+  <div class="max-w-7xl mx-auto px-6 py-10 mt-16 min-h-screen">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-3xl font-semibold">Productes</h1>
       <div class="flex items-center gap-2">

@@ -53,7 +53,7 @@ function submit() {
 
 <template>
 <Navbar />
-  <div class="max-w-xl mx-auto mt-10">
+  <div class="max-w-xl mx-auto mt-28">
     <h1 class="text-3xl font-semibold mb-6 text-gray-900">Editar Categoría</h1>
 
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 space-y-6">

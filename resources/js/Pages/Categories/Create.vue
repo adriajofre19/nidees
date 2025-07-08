@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
+import Navbar from '@/Components/Navbar.vue'
 
 function generateSlug(name) {
   return name
@@ -44,7 +45,8 @@ function submit() {
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-10">
+  <Navbar />
+  <div class="max-w-xl mx-auto mt-28">
     <h1 class="text-3xl font-semibold mb-6 text-gray-900">Crear Categoría</h1>
 
     <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 space-y-6">

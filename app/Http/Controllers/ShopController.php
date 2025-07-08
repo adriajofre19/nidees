@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductImage; // Añadir arriba
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
@@ -15,8 +16,11 @@ class ShopController extends Controller
     {
         $products = Product::with(['category', 'images'])->get();
 
+        $user = Auth::User();
+
         return Inertia::render('Shop/Index', [
             'products' => $products,
+            'user' => $user
         ]);
     }
 }

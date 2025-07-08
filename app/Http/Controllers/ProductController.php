@@ -88,7 +88,7 @@ class ProductController extends Controller
         // Obtener los productos de la misma categoría, excluyendo el actual
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
-            ->with('images')
+            ->with('images','category')
             ->get();
 
 

@@ -2,7 +2,7 @@
   <Head :title="product.name" />
   <Navbar />
   
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+  <div class="min-h-screen mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
       <!-- Breadcrumb -->
       <div class="mb-4 sm:mb-6">
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Contenido principal del producto -->
-      <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
+      <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden ">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           <!-- Galería de imágenes -->
           <div class="p-4 sm:p-6 lg:p-8">
@@ -45,7 +45,7 @@
                 @click="selectImage(image, i)"
                 class="w-16 h-16 sm:w-20 sm:h-20 object-cover border-2 rounded-lg cursor-pointer transition-all duration-200 flex-shrink-0"
                 :class="{ 
-                  'ring-2 ring-emerald-600 border-emerald-600': selectedImage === image,
+                  'ring-3 ring-emerald-600 border-emerald-600': selectedImage === image,
                   'border-gray-200 hover:border-emerald-300': selectedImage !== image
                 }"
               />
@@ -89,7 +89,7 @@
 
             <!-- Botón añadir al carrito -->
             <div class="mt-6 sm:mt-8">
-              <button 
+              <button
                 @click="addToCart(product.id)"
                 :disabled="isAddingToCart"
                 class="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-xl hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
@@ -128,7 +128,7 @@
             v-for="related in relatedProducts"
             :key="related.id"
             :href="route('product.show', related.slug)"
-            class="bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] group"
+            class="bg-white rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 transform hover:scale-[1.02] group"
             @mouseenter="startImageCycle(related)"
             @mouseleave="stopImageCycle(related.id)"
           >
@@ -170,13 +170,13 @@
             <div class="p-3 sm:p-4 lg:p-6">
               <!-- Categoría -->
               <div class="mb-2">
-                <span class="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-2 py-1 rounded-full">
+                <span class="inline-block text-gray-600 text-sm font-medium py-1">
                   {{ related.category?.name || 'Sense categoria' }}
                 </span>
               </div>
               
               <!-- Nombre -->
-              <h3 class="font-semibold text-base sm:text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-emerald-600 transition-colors duration-200">
+              <h3 class="font-semibold text-base sm:text-lg text-gray-900 mb-2 line-clamp-2 transition-colors duration-200">
                 {{ related.name }}
               </h3>
               

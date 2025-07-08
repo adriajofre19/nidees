@@ -7,20 +7,69 @@ use App\Http\Controllers\FiraController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\PaymentController;
+use App\Models\User;
 
-Route::post('/create-checkout-session', [PaymentController::class, 'createCheckoutSession']);
+use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/checkout/success', [PaymentController::class, 'success'])->name('payment.success');
-Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+Route::get('/login-google', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-callback', function () {
+    $user = Socialite::driver('google')->user();
 
+    $userExists = User::where('external_id', $user->id)->first();
 
+    if($userExists) {
+        Auth::login($userExists);
+    } else {
+        $newUser = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'external_id' => $user->id,
+            'avatar' => $user->avatar,
+        ]);
 
+        Auth::login($newUser);
+    }
 
+    return redirect('/');
+ 
+});
+
+// Espanol
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/tienda', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/nosotros', [FiraController::class, 'index'])->name('nosotros.index');
+Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+// Catalan
+Route::prefix('ca')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/tienda', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/nosotros', [FiraController::class, 'index'])->name('nosotros.index');
+    Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+});
+
+// English
+Route::prefix('en')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/tienda', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/nosotros', [FiraController::class, 'index'])->name('nosotros.index');
+    Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -41,14 +90,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/nosotros', [FiraController::class, 'index'])->name('nosotros.index');
+
 Route::post('/nosotros', [FiraController::class, 'store'])->name('fires.store');
 Route::delete('/nosotros/{fire}', [FiraController::class, 'destroy'])->name('fires.destroy');
 
-Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/increment/{cartItem}', [CartController::class, 'increment'])->name('cart.increment');

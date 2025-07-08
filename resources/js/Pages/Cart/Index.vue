@@ -2,7 +2,7 @@
   <Head title="Cistella" />
   <Navbar />
   
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+  <div class="min-h-screen mt-16">
     <div class="max-w-7xl mx-auto py-6 sm:py-8 lg:py-12 px-4 sm:px-6 lg:px-8">
       <div class="lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start">
         <!-- Columna principal del carrito -->
@@ -105,23 +105,23 @@
                   <!-- Layout desktop: horizontal -->
                   <div class="hidden sm:flex sm:items-center sm:space-x-6">
                     <!-- Imagen del producto -->
-                    <div class="flex-shrink-0">
+                    <Link :href="route('product.show', item.product.slug)" class="flex-shrink-0">
                       <img
                         :src="item.product.images[0] ? `/storage/${item.product.images[0].path}` : '/placeholder.jpg'"
                         :alt="item.product.name"
                         class="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 object-cover rounded-xl shadow-md"
                       />
-                    </div>
+                    </Link>
                     
                     <!-- Información del producto -->
-                    <div class="flex-1 min-w-0">
+                    <Link :href="route('product.show', item.product.slug)" class="flex-1 min-w-0">
                       <h3 class="text-lg lg:text-lg font-semibold text-gray-900 truncate">
                         {{ item.product.name }}
                       </h3>
                       <p class="text-xl lg:text-lg font-bold text-emerald-600 mt-1">
                         {{ formatPrice(item.product.price).toFixed(2) }}€
                       </p>
-                    </div>
+                    </Link>
                     
                     <!-- Controles de cantidad -->
                     <div class="flex items-center space-x-3">
@@ -249,6 +249,8 @@ import { ref, computed } from 'vue'
 import { Head, Link, router } from '@inertiajs/vue3'
 import { Trash2, ArrowLeft } from 'lucide-vue-next'
 import Navbar from '@/Components/Navbar.vue'
+
+
 
 
 const props = defineProps({
