@@ -182,7 +182,7 @@
               </div>
               
               <!-- Nombre -->
-              <h3 class="font-semibold text-base sm:text-lg text-gray-900 mb-2 line-clamp-2 transition-colors duration-200">
+              <h3 class="font-semibold text-base sm:text-lg text-gray-900 mb-2 transition-colors duration-200">
                 {{ related.name }}
               </h3>
               
@@ -315,12 +315,3 @@ const supportedLangs = ['ca', 'en']
 const pathParts = window.location.pathname.split('/')
 const currentLang = supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es'
 </script>
-
-<style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
