@@ -39,8 +39,10 @@ class FiraController extends Controller
 
         // Guardar imagen si existe
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images/fires', 'public');
-            $fire->image = $path;
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/fires'), $imageName);
+            $fire->image = 'images/fires/' . $imageName;
             $fire->save();
         }
 

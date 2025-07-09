@@ -134,7 +134,7 @@
             v-for="related in relatedProducts"
             :key="related.id"
             :href="route('product.show', related.slug)"
-            class="bg-white rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 transform hover:scale-[1.02] group"
+            class="bg-white overflow-hidden transition-all duration-300 transform hover:scale-[1.02] group"
             @mouseenter="startImageCycle(related)"
             @mouseleave="stopImageCycle(related.id)"
           >
@@ -198,12 +198,14 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref, defineProps, onMounted, onBeforeUnmount, computed } from 'vue'
 import { Link, Head, router } from '@inertiajs/vue3'
 import Navbar from '@/Components/Navbar.vue'
+import Footer from '@/Components/Footer.vue'
 import { ShoppingCart } from 'lucide-vue-next'
 
 const props = defineProps({

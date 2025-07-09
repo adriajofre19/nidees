@@ -47,7 +47,7 @@
                     <div class="flex items-start space-x-4 mb-4">
                       <div class="flex-shrink-0">
                         <img
-                          :src="item.product.images[0] ? `/storage/${item.product.images[0].path}` : '/placeholder.jpg'"
+                          :src="item.product.images[0] ? `/public/${item.product.images[0].path}` : '/placeholder.jpg'"
                           :alt="item.product.name"
                           class="w-20 h-20 object-cover rounded-lg shadow-md"
                         />

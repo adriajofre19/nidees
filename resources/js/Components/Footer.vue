@@ -17,7 +17,7 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
         
         <!-- Columna 1: Logo y descripción -->
         <div>
-          <img src="/images/logo2.png" alt="niDEES Logo" class="h-5 mb-4">
+          <img src="/images/logo2.png" alt="nidees Logo" class="h-5 mb-4">
 
           <p v-if="currentLang === 'ca'" class="text-sm text-gray-600">
             Disseny sostenible amb plàstics reciclats.
@@ -112,7 +112,7 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
       <div class="mt-8 pt-8 border-t">
         <div class="text-sm text-gray-600 text-center flex items-center justify-center">
           <p>© {{ Year() }}</p>
-          <img src="/images/logo2.png" class="h-3 mb-1 px-2" />
+          <img src="/images/logo2.png" alt="Logo 2" class="h-3 mb-1 px-2" />
           <p>
             {{
               currentLang === 'ca'

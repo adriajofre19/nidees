@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         
-        $products = Product::with(['category', 'images'])->get();
+        $products = Product::with(['category', 'images'])->take(12)->get();
         $categories = Category::all();
 
         return Inertia::render('Home', [

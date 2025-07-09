@@ -59,8 +59,8 @@ class ProductController extends Controller
     if ($request->hasFile('image')) {
         foreach ($request->file('image') as $img) {
             $imageName = time() . '_' . $img->getClientOriginalName();
-            $img->move(public_path('images/products'), $imageName);
-            $path = 'images/products/' . $imageName;
+        $img->move(public_path('images/products'), $imageName);
+        $path = 'images/products/' . $imageName;
 
             ProductImage::create([
                 'product_id' => $product->id,
@@ -84,21 +84,47 @@ class ProductController extends Controller
     }
 
     public function product(Product $product)
-    {
-        $product->load(['category', 'images']); // Cargar relaciones
+{
+    // Cargar relaciones del producto actual
+    $product->load(['category', 'images']);
 
-        // Obtener los productos de la misma categoría, excluyendo el actual
-        $relatedProducts = Product::where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->with('images','category')
+    // Buscar productes relacionats (mateixa categoria, excloent l'actual)
+    $relatedProducts = Product::where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id)
+        ->with(['images', 'category'])
+        ->get();
+
+    // Comptar quants relacionats tenim
+    $count = $relatedProducts->count();
+
+    // Si hi ha 3 o més, agafem 3 aleatoris d'aquests
+    if ($count >= 4) {
+        $relatedProducts = $relatedProducts->random(4);
+    } else {
+        // Ens faltaran alguns productes: quants?
+        $needed = 4 - $count;
+
+        // Agafem productes aleatoris excloent l'actual i els ja agafats
+        $randomProducts = Product::where('id', '!=', $product->id)
+            ->when($count > 0, function ($query) use ($relatedProducts) {
+                return $query->whereNotIn('id', $relatedProducts->pluck('id'));
+            })
+            ->with(['images', 'category'])
+            ->inRandomOrder()
+            ->take($needed)
             ->get();
 
-
-        return Inertia::render('Shop/Show', [
-            'product' => $product,
-            'relatedProducts' => $relatedProducts,
-        ]);
+        // Afegim els aleatoris als relacionats
+        $relatedProducts = $relatedProducts->concat($randomProducts);
     }
+
+    // Retornar la vista amb el producte i els relacionats
+    return Inertia::render('Shop/Show', [
+        'product' => $product,
+        'relatedProducts' => $relatedProducts,
+    ]);
+}
+
 
     public function update(Request $request, Product $product)
 {

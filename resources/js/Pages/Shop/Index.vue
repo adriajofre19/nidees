@@ -10,9 +10,6 @@ const props = defineProps({
   user: Array
 })
 
-
-if(!props.user) console.log(props.user);
-
 const activeImageIndexes = ref({})
 const intervals = ref({})
 
@@ -58,7 +55,7 @@ const supportedLangs = ['ca', 'en']
 const pathParts = window.location.pathname.split('/')
 const currentLang = supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es'
 
-console.log(currentLang);
+
 </script>
 
 <template>

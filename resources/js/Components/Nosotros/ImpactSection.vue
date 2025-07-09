@@ -132,7 +132,7 @@ const observeSection = () => {
         observer.disconnect() // Only animate once
       }
     })
-  }, { threshold: 0.5 })
+  }, { threshold: 0.1 })
 
   // Find the impact section and observe it
   const impactSection = document.querySelector('section')
