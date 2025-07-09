@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
 
+use App\Http\Middleware\AdminMiddleware;
+
 use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/login-google', function () {
@@ -71,7 +73,7 @@ Route::prefix('en')->group(function () {
 
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
@@ -80,19 +82,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    
 });
 
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::post('/nosotros', [FiraController::class, 'store'])->name('fires.store');
+    Route::delete('/nosotros/{fire}', [FiraController::class, 'destroy'])->name('fires.destroy');
+});
 
-
-Route::post('/nosotros', [FiraController::class, 'store'])->name('fires.store');
-Route::delete('/nosotros/{fire}', [FiraController::class, 'destroy'])->name('fires.destroy');
 
 Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
 

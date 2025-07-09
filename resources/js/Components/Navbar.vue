@@ -103,9 +103,14 @@ const changeLanguage = (event) => {
         <span class="block text-sm text-gray-500 truncate">{{ $page.props.auth.user.role }}</span>
       </div>
       <ul class="py-2">
-        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a></li>
-        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a></li>
-        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Earnings</a></li>
+        <template v-if="$page.props.auth.user">
+          <li v-if="$page.props.auth.user.role === 'admin'">
+            <Link :href="route('categories.index')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Categories</Link>
+          </li>
+          <li v-if="$page.props.auth.user.role === 'admin'">
+            <Link :href="route('products.index')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Productes</Link>
+          </li>
+        </template>
         <li>
           <Link :href="route('logout')" method="post"
             class="w-full text-left block px-4 py-2 text-sm text-red-500 hover:bg-gray-100">

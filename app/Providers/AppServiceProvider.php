@@ -34,15 +34,15 @@ class AppServiceProvider extends ServiceProvider
     ],
     'cartCount' => function () {
         if (Auth::check()) {
-                    return Auth::user()->cartItems()->sum('quantity');
-                }
+            return Auth::user()->cartItems()->sum('quantity');
+        }
 
-                $guestId = Cookie::get('guest_id');
-                if ($guestId) {
-                    return CartItem::where('guest_id', $guestId)->sum('quantity');
-                }
+        $guestId = Cookie::get('guest_id');
+        if ($guestId) {
+            return CartItem::where('guest_id', $guestId)->sum('quantity');
+        }
 
-                return 0;
+        return 0;
     },
 ]);
     }
