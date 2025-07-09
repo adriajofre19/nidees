@@ -10,8 +10,8 @@ const props = defineProps({
   user: Array
 })
 
-if(!props.user) console.log(props.user);
 
+if(!props.user) console.log(props.user);
 
 const activeImageIndexes = ref({})
 const intervals = ref({})
@@ -99,7 +99,7 @@ console.log(currentLang);
           
 
           <button
-              v-if="props.user"
+              
               type="button"
               @click.stop.prevent="addToCart(product.id)"
               :disabled="isAddingToCart"
@@ -111,17 +111,7 @@ console.log(currentLang);
               </span>
           </button>
 
-          <Link
-              v-else
-              type="button"
-              :href="route('login')"
-              class="mt-3 w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold py-3 sm:py-3 px-4 sm:px-6 rounded-md hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
-            >
-              <span class="flex items-center justify-center">
-                <ShoppingCart class="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                {{ currentLang === 'ca' ? 'Afegir a la cistella' : currentLang === 'en' ? 'Add to cart' : 'Añadir a la cesta' }}
-              </span>
-          </Link>
+         
 
           
         </div>

@@ -10,7 +10,10 @@
           :href="route('shop.index')" 
           class="inline-flex items-center text-sm text-gray-500 hover:text-emerald-600 transition-colors duration-200"
         >
-          ← Tornar a la botiga
+        {{ 
+          currentLang === 'ca' ? '← Tornar a la botiga' : currentLang === 'en' ? '← Go back to the store' : '← Volver a la tienda'
+        }}
+          
         </Link>
       </div>
 
@@ -78,7 +81,10 @@
               <!-- Descripción -->
               <div>
                 <h2 class="font-semibold text-lg sm:text-xl text-gray-900 mb-3 sm:mb-4">
-                  Detalls del producte
+                  
+                  {{ 
+                      currentLang === 'ca' ? 'Detalls del producte' : currentLang === 'en' ? 'Product details' : 'Detalles del producto'
+                  }}
                 </h2>
                 <div 
                   class="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-line"
@@ -103,7 +109,7 @@
                 </span>
                 <span v-else class="flex items-center justify-center">
                   <ShoppingCart class="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                  Afegir a la cistella
+                  {{ currentLang === 'ca' ? 'Afegir a la cistella' : currentLang === 'en' ? 'Add to cart' : 'Añadir a la cesta' }}
                 </span>
               </button>
             </div>
@@ -300,6 +306,12 @@ onBeforeUnmount(() => {
     if (interval) clearInterval(interval)
   })
 })
+
+const supportedLangs = ['ca', 'en']
+
+// Detecta el idioma actual (si está en el primer segmento)
+const pathParts = window.location.pathname.split('/')
+const currentLang = supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es'
 </script>
 
 <style scoped>

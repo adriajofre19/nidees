@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Cookie;
+use App\Models\CartItem;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,9 +34,15 @@ class AppServiceProvider extends ServiceProvider
     ],
     'cartCount' => function () {
         if (Auth::check()) {
-            return Auth::user()->cartItems()->sum('quantity');
-        }
-        return 0;
+                    return Auth::user()->cartItems()->sum('quantity');
+                }
+
+                $guestId = Cookie::get('guest_id');
+                if ($guestId) {
+                    return CartItem::where('guest_id', $guestId)->sum('quantity');
+                }
+
+                return 0;
     },
 ]);
     }

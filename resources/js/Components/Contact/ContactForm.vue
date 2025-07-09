@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-5xl mx-auto p-8 min-h-screen">
-    <div class="bg-white rounded-lg p-8 shadow-sm">
-      <h1 class="text-3xl font-normal text-gray-800 mb-8">Contacta amb nosaltres</h1>
+  <div class="max-w-5xl mx-auto p-4 md:p-8 min-h-screen">
+    <div class="bg-white rounded-lg p-4 md:p-8 ">
+      <h1 class="text-2xl md:text-3xl font-normal text-gray-800 mb-8">Contacta amb nosaltres</h1>
       
       <form @submit.prevent="submitForm" class="space-y-6">
         <!-- Name Field -->

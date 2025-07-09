@@ -10,7 +10,7 @@
   </div>
 
   <!-- Sección principal -->
-  <div class="bg-[url(/images/header.webp)] bg-[#e9e9e9] bg-no-repeat  bg-center bg-opacity-100">
+  <div class="bg-[url(/images/header.webp)] bg-[#e9e9e9] bg-no-repeat bg-center bg-opacity-100">
     <div class="max-w-7xl mx-auto flex items-center justify-center px-4 py-12 min-h-[600px] md:min-h-[700px] lg:h-[839px]">
 
       <!-- Grid para LG, Flex para SM/MD -->
@@ -23,7 +23,7 @@
           <div class="row-start-2"></div>
           <div class="row-start-2"></div>
           <div class="row-start-2 flex items-start justify-center pr-4">
-            <h1 class="text-[80px] font-bold leading-none">UPCYCLING</h1>
+            <h1 class="xl:text-[80px] lg:text-6xl font-bold leading-none">UPCYCLING</h1>
           </div>
           <div class="row-start-3"></div>
           <div class="row-start-3"></div>

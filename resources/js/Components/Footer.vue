@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import { Instagram, Facebook, Twitter } from 'lucide-vue-next'
+import { Instagram, Facebook, Twitter, Mail } from 'lucide-vue-next'
 
 function Year() {
   return new Date().getFullYear();
@@ -98,8 +98,8 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
             <a href="#" class="text-gray-600 hover:text-emerald-600" aria-label="Instagram">
               <Instagram class="h-5 w-5" />
             </a>
-            <a href="#" class="text-gray-600 hover:text-emerald-600" aria-label="Facebook">
-              <Facebook class="h-5 w-5" />
+            <a href="#" class="text-gray-600 hover:text-emerald-600" aria-label="Mail">
+              <Mail class="h-5 w-5" />
             </a>
             <a href="#" class="text-gray-600 hover:text-emerald-600" aria-label="Twitter">
               <Twitter class="h-5 w-5" />
