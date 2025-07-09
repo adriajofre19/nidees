@@ -58,7 +58,9 @@ class ProductController extends Controller
     // Guardar imágenes si existen
     if ($request->hasFile('image')) {
         foreach ($request->file('image') as $img) {
-            $path = $img->store('images/products', 'public');
+            $imageName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/products'), $imageName);
+            $path = 'images/products/' . $imageName;
 
             ProductImage::create([
                 'product_id' => $product->id,
