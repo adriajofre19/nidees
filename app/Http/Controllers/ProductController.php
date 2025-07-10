@@ -59,8 +59,8 @@ class ProductController extends Controller
     if ($request->hasFile('image')) {
         foreach ($request->file('image') as $img) {
             $imageName = time() . '_' . $img->getClientOriginalName();
-        $img->move(public_path('images/products'), $imageName);
-        $path = 'images/products/' . $imageName;
+            $img->move(public_path('images/products'), $imageName);
+            $path = 'images/products/' . $imageName;
 
             ProductImage::create([
                 'product_id' => $product->id,
@@ -163,7 +163,9 @@ class ProductController extends Controller
     // ✅ 2. Subir nuevas imágenes
     if ($request->hasFile('images')) {
         foreach ($request->file('images') as $img) {
-            $path = $img->store('images/products', 'public');
+            $imageName = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('images/products'), $imageName);
+            $path = 'images/products/' . $imageName;
 
             ProductImage::create([
                 'product_id' => $product->id,

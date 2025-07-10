@@ -121,10 +121,16 @@
       <div v-if="relatedProducts && relatedProducts.length > 0" class="mt-12 sm:mt-16">
         <div class="mb-6 sm:mb-8">
           <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-            Productes relacionats
+            
+            {{ 
+              currentLang === 'ca' ? 'Productes relacionats' : currentLang === 'en' ? 'Related Products' : 'Productos relacionados'
+            }}
           </h2>
           <p class="text-gray-600 text-sm sm:text-base">
-            Altres productes que et poden interessar
+            
+            {{ 
+              currentLang === 'ca' ? 'Altres productes que et poden interessar' : currentLang === 'en' ? 'Other products that may interest you' : 'Otros productos que te pueden interesar'
+            }}
           </p>
         </div>
 

@@ -10,7 +10,8 @@
             row.length === 3 ? 'justify-between' : ''
           ]"
         >
-          <Link :href="route('product.show', product.slug)"
+          <Link 
+            :href="currentLang === 'ca' ? `/ca/shop/${product.slug}` : currentLang === 'en' ? `/en/shop/${product.slug}` : `/shop/${product.slug}`"
             v-for="product in row"
             :key="product.id"
             class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition flex-1 basis-full sm:basis-[48%] md:basis-[30%] max-w-full sm:max-w-[48%] md:max-w-[32%]"
@@ -40,7 +41,7 @@
 
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -66,6 +67,10 @@ const rows = computed(() => {
   }
   return result
 })
+
+const supportedLangs = ['ca', 'en']
+const pathParts = window.location.pathname.split('/')
+const currentLang = ref(supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es')
 </script>
 
 <style scoped>

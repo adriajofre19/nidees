@@ -70,7 +70,7 @@ const currentLang = supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es'
         v-for="product in products"
         :key="product.id"
         class="transition overflow-hidden flex flex-col group"
-        :href="route('product.show', product.slug)"
+        :href="currentLang === 'ca' ? `/ca/shop/${product.slug}` : currentLang === 'en' ? `/en/shop/${product.slug}` : `/shop/${product.slug}`"
       >
         <div
           class="aspect-square bg-gray-100 flex items-center justify-center relative w-full"

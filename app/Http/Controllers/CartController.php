@@ -1,28 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\CartItem;
 use Illuminate\Support\Facades\Cookie;
+use App\Models\CartItem;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductImage;
-
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
+use App\Models\ProductImage;
 
 class CartController extends Controller
 {
+    public function index2(Request $request)
+{
+    $userId = auth()->id();
+
+    $items = CartItem::with(['product.images'])
+        ->where('user_id', $userId)
+        ->get();
+
+    return Inertia::render('Cart/Index', [
+        'items' => $items,
+    ]);
+}
 
 public function index(Request $request)
 {
     $userId = auth()->id();
     $guestId = $request->cookie('guest_id');
-
-    
 
     $itemsQuery = CartItem::with(['product.images']);
 
@@ -42,22 +50,47 @@ public function index(Request $request)
 }
 
 
-public function add(Request $request)
+    public function add2(Request $request)
 {
-    // Obtener guest_id de la cookie o crear uno nuevo
-    $guestId = $request->cookie('guest_id');
-    
-    if (!$guestId) {
-        $guestId = Str::uuid()->toString();
-    }
-    
     $request->validate([
         'product_id' => 'required|exists:products,id',
     ]);
 
     $userId = auth()->id();
 
-    // Aquí buscar carrito según user_id o guest_id
+    $cartItem = CartItem::where('user_id', $userId)
+        ->where('product_id', $request->product_id)
+        ->first();
+
+    if ($cartItem) {
+        $cartItem->increment('quantity');
+    } else {
+        CartItem::create([
+            'user_id' => $userId,
+            'product_id' => $request->product_id,
+            'quantity' => 1,
+        ]);
+    }
+
+    return back()->with('success', 'Producte afegit al carret.');
+}
+
+public function add(Request $request)
+{
+    $guestId = $request->cookie('guest_id');
+    
+    $newGuestId = false;
+    if (!$guestId) {
+        $guestId = Str::uuid()->toString();
+        $newGuestId = true;
+    }
+
+    $request->validate([
+        'product_id' => 'required|exists:products,id',
+    ]);
+
+    $userId = auth()->id();
+
     $cartItemQuery = CartItem::where('product_id', $request->product_id);
 
     if ($userId) {
@@ -71,17 +104,21 @@ public function add(Request $request)
     if ($cartItem) {
         $cartItem->increment('quantity');
     } else {
-
-        
         CartItem::create([
             'user_id' => $userId,
-            'guest_id' =>  $guestId,
+            'guest_id' => $guestId,
             'product_id' => $request->product_id,
             'quantity' => 1,
         ]);
     }
 
     $response = back()->with('success', 'Producte afegit al carret.');
+
+    // ✅ Añadir la cookie solo si es nueva
+    if ($newGuestId) {
+        $cookie = cookie('guest_id', $guestId, 60 * 24 * 30); // 30 días
+        return $response->withCookie($cookie);
+    }
 
     return $response;
 }

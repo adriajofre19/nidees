@@ -68,12 +68,8 @@ function deleteFira(id) {
   }
 }
 
-const currentLang = computed(() => {
-  const path = window.location.pathname
-  if (path.startsWith('/en')) return 'en'
-  if (path.startsWith('/ca')) return 'ca'
-  return 'es'
-})
+const pathParts = window.location.pathname.split('/')
+const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
 
 const translations = {
   ca: {

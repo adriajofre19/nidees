@@ -17,6 +17,14 @@ use App\Http\Middleware\AdminMiddleware;
 
 use Laravel\Socialite\Facades\Socialite;
 
+
+use App\Http\Controllers\CheckoutController;
+
+Route::post('/checkout', [CheckoutController::class, 'checkout']);
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+
+
 Route::get('/login-google', function () {
     return Socialite::driver('google')->redirect();
 });
