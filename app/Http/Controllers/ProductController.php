@@ -38,6 +38,8 @@ class ProductController extends Controller
         'name' => 'required|string|max:255',
         'slug' => 'nullable|string|max:255|unique:products',
         'description' => 'nullable|string',
+        'ca_description' => 'nullable|string', // nuevo campo
+        'en_description' => 'nullable|string', // nuevo campo
         'price' => 'required|numeric|min:0',
         'category_id' => 'required|exists:categories,id',
         'image' => 'nullable|array',
@@ -51,6 +53,8 @@ class ProductController extends Controller
         'name' => $request->name,
         'slug' => $slug,
         'description' => $request->description,
+        'ca_description' => $request->ca_description, // nuevo campo
+        'en_description' => $request->en_description, // nuevo campo
         'price' => $request->price,
         'category_id' => $request->category_id,
     ]);
@@ -132,6 +136,8 @@ class ProductController extends Controller
         'name' => 'required|string|max:255',
         'slug' => 'nullable|string|max:255|unique:products,slug,' . $product->id,
         'description' => 'nullable|string',
+        'ca_description' => 'nullable|string', // nuevo campo
+        'en_description' => 'nullable|string', // nuevo campo
         'price' => 'required|numeric|min:0',
         'category_id' => 'required|exists:categories,id',
         'images.*' => 'nullable|image|max:2048', // nuevas imágenes
@@ -146,6 +152,8 @@ class ProductController extends Controller
         'name' => $request->name,
         'slug' => $slug,
         'description' => $request->description,
+        'ca_description' => $request->ca_description, // nuevo campo
+        'en_description' => $request->en_description, // nuevo campo
         'price' => $request->price,
         'category_id' => $request->category_id,
     ]);

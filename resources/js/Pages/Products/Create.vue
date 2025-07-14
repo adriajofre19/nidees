@@ -20,6 +20,8 @@ const form = useForm({
   name: '',
   slug: '',
   description: '',
+  ca_description: '', // ← nuevo campo
+  en_description: '', // ← nuevo campo
   image: [], // ← ahora es array
   price: 0,
   category_id: null,
@@ -75,6 +77,18 @@ function submit() {
           <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
           <RichTextEditor v-model="form.description" />
           <p v-if="errors.description" class="text-sm text-red-500 mt-1">{{ errors.description }}</p>
+        </div>
+
+        <div>
+          <label for="ca_description" class="block text-sm font-medium text-gray-700 mb-1">Descripción en Catalán</label>
+          <RichTextEditor v-model="form.ca_description" />
+          <p v-if="errors.ca_description" class="text-sm text-red-500 mt-1">{{ errors.ca_description }}</p>
+        </div>
+
+        <div>
+          <label for="en_description" class="block text-sm font-medium text-gray-700 mb-1">Descripción en Inglés</label>
+          <RichTextEditor v-model="form.en_description" />
+          <p v-if="errors.en_description" class="text-sm text-red-500 mt-1">{{ errors.en_description }}</p>
         </div>
 
         <div>

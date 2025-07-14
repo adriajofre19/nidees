@@ -86,7 +86,15 @@
                       currentLang === 'ca' ? 'Detalls del producte' : currentLang === 'en' ? 'Product details' : 'Detalles del producto'
                   }}
                 </h2>
-                <div 
+                <div v-if="currentLang === 'ca'"
+                  class="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-line"
+                  v-html="product.ca_description"
+                ></div>
+                <div v-else-if="currentLang === 'en'"
+                  class="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-line"
+                  v-html="product.en_description"
+                ></div>
+                <div v-else
                   class="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-line"
                   v-html="product.description"
                 ></div>

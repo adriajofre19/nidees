@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { ShoppingCart, Menu, X } from 'lucide-vue-next'
+import { ref, computed } from 'vue'
+import { ShoppingCart, Menu, X, UserRound } from 'lucide-vue-next'
 import { Link } from '@inertiajs/vue3'
 
 // Mobile & user menu
@@ -45,7 +45,7 @@ const changeLanguage = (langOrEvent) => {
   <nav class="bg-white border-b border-gray-200 fixed top-0 left-0 w-full z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <a :href="currentLang === 'ca' ? '/ca' : currentLang === 'en' ? '/en' : '/'" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="/images/logo.png" class="h-10" alt="Logo 1" />
         <img src="/images/logo2.png" class="h-8" alt="Logo 2" />
       </a>
@@ -181,18 +181,21 @@ const changeLanguage = (langOrEvent) => {
               type="button"
               class="hidden md:flex items-center space-x-2 text-sm focus:outline-none"
             >
-              <img
+              <img v-if="$page.props.auth.user.avatar"
                 class="w-8 h-8 rounded-full"
                 :src="$page.props.auth.user.avatar"
                 alt="user photo"
               />
-              <span class="text-gray-700 font-medium">{{ $page.props.auth.user.name }}</span>
+              <div v-else class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                  {{ $page.props.auth.user.name.charAt(0).toUpperCase() }}
+              </div>
+              
             </button>
 
             <!-- Dropdown usuario escritorio -->
             <div
               v-if="userMenuOpen"
-              class="absolute right-0 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm z-50"
+              class="absolute left-0 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm z-50"
             >
               <div class="px-4 py-3">
                 <span class="block text-sm text-gray-900">{{ $page.props.auth.user.name }}</span>
