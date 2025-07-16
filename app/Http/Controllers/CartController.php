@@ -123,27 +123,33 @@ public function add(Request $request)
     return $response;
 }
 
-public function remove(CartItem $cartItem)
+public function remove(Request $request, CartItem $cartItem)
 {
     if ($cartItem->user_id === auth()->id()) {
+        $cartItem->delete();
+    } elseif ($cartItem->guest_id === $request->cookie('guest_id')) {
         $cartItem->delete();
     }
 
     return back()->with('success', 'Producte eliminat del carret.');
 }
 
-public function increment(CartItem $cartItem)
+public function increment(Request $request, CartItem $cartItem)
 {
     if ($cartItem->user_id === auth()->id()) {
+        $cartItem->increment('quantity');
+    } elseif ($cartItem->guest_id === $request->cookie('guest_id')) {
         $cartItem->increment('quantity');
     }
 
     return back();
 }
 
-public function decrement(CartItem $cartItem)
+public function decrement(Request $request, CartItem $cartItem)
 {
     if ($cartItem->user_id === auth()->id() && $cartItem->quantity > 1) {
+        $cartItem->decrement('quantity');
+    } elseif ($cartItem->guest_id === $request->cookie('guest_id') && $cartItem->quantity > 1) {
         $cartItem->decrement('quantity');
     }
 

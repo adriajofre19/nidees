@@ -95,7 +95,7 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
           <h3 v-else class="text-lg font-semibold mb-4">Síguenos</h3>
 
           <div class="flex space-x-4">
-            <a href="#" class="text-gray-600 hover:text-emerald-600" aria-label="Instagram">
+            <a href="https://instagram.com/nidees_artplastic" class="text-gray-600 hover:text-emerald-600" aria-label="Instagram">
               <Instagram class="h-5 w-5" />
             </a>
             <a href="#" class="text-gray-600 hover:text-emerald-600" aria-label="Mail">

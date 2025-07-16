@@ -112,7 +112,7 @@ Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/increment/{cartItem}', [CartController::class, 'increment'])->name('cart.increment');
 Route::post('/cart/decrement/{cartItem}', [CartController::class, 'decrement'])->name('cart.decrement');
-
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 
 require __DIR__.'/auth.php';

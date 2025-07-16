@@ -21,16 +21,26 @@ const errors = ref({});
 const processing = ref(false);
 const previewImage = ref(null);
 
+const pathParts = window.location.pathname.split('/')
+const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
+
 // Obtener el mes actual en catalán
-const currentMonth = computed(() => {
+function getCurrentMonth(lang = 'es') {
   const monthNames = {
     ca: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
     es: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
     en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   }
+
   const now = new Date()
-  return monthNames[currentLang.value][now.getMonth()]
-})
+  const selectedLang = monthNames[lang] ? lang : 'es'
+  return monthNames[selectedLang][now.getMonth()]
+}
+
+// Ejemplo de uso con currentLang
+const currentMonth = getCurrentMonth(currentLang.value)
+
+
 
 
 const handleImage = (e) => {
@@ -68,8 +78,7 @@ function deleteFira(id) {
   }
 }
 
-const pathParts = window.location.pathname.split('/')
-const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
+
 
 const translations = {
   ca: {
@@ -137,7 +146,8 @@ const translations = {
   }
 }
 
-const t = (key) => translations[currentLang.value][key]
+
+
 
 
 
@@ -149,13 +159,17 @@ const t = (key) => translations[currentLang.value][key]
       <!-- Título dinámico con el mes actual -->
       <div class="mb-12">
         <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-          {{ t('monthTitle') }}
+          {{ 
+            currentLang === 'ca' ? 'Aquest mes de' : currentLang === 'en' ? 'This month of' : 'Este mes de'  
+            }}
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-700">
             {{ currentMonth }}
           </span>
         </h2>
         <p class="text-xl text-gray-600 font-medium">
-          {{ t('subtitle') }}
+          {{ 
+            currentLang === 'ca' ? 'ens Trobaràs a les Fires' : currentLang === 'en' ? 'you will find us at the Fairs' : 'nos encontrarás en las Ferias' 
+            }}
         </p>
       </div>
 
@@ -291,8 +305,14 @@ const t = (key) => translations[currentLang.value][key]
       <!-- Mensaje cuando no hay fires -->
       <div v-if="!fires || fires.length === 0" class="text-center py-16">
         <div class="text-gray-400 text-6xl mb-4">📅</div>
-        <h3 class="text-xl font-semibold text-gray-600 mb-2">{{ t('noFairs') }}</h3>
-        <p class="text-gray-500">{{ t('soon') }}</p>
+        <h3 class="text-xl font-semibold text-gray-600 mb-2">{{ 
+          currentLang === 'ca' ? 'No hi ha fires programades' : currentLang === 'en' ? 'No hay ferias programadas' : 'No hay ferias programadas' 
+          }}</h3>
+        <p class="text-gray-500">
+          {{ 
+            currentLang === 'ca' ? 'Torna més tard per veure les novetats' : currentLang === 'en' ? 'Come back later to see the news' : 'Vuelve más tarde para ver las novedades' 
+            }}
+        </p>
       </div>
     </div>
   </div>

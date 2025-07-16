@@ -61,6 +61,6 @@ class CheckoutController extends Controller
 
     public function cancel(Request $request)
     {
-        return Inertia::render('Checkout/Success');
+        return Inertia::render('Checkout/Cancel');
     }
 }

@@ -32,7 +32,9 @@ watch(
             document.body.style.overflow = '';
 
             setTimeout(() => {
-                dialog.value?.close();
+                if (dialog.value && dialog.value.parentNode !== null) {
+                    dialog.value.close();
+                }
                 showSlot.value = false;
             }, 200);
         }
