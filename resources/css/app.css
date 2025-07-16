@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+[type="checkbox"]:checked {
+    border-color: transparent;
+    background-color: #10b981;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+[type="checkbox"]:checked:focus {
+    border-color: transparent;
+    background-color: #10b981;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}

@@ -8,6 +8,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PrivacyController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -58,6 +59,10 @@ Route::get('/nosotros', [FiraController::class, 'index'])->name('nosotros.index'
 Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/privacidad', [PrivacyController::class, 'index'])->name('privacy-policy.index');
+Route::get('/cookies', [PrivacyController::class, 'cookies'])->name('cookies.index');
+Route::get('/legal', [PrivacyController::class, 'legal'])->name('legal.index');
+Route::get('/terminos', [PrivacyController::class, 'terms'])->name('terms.index');
 
 // Catalan
 Route::prefix('ca')->group(function () {
@@ -67,6 +72,10 @@ Route::prefix('ca')->group(function () {
     Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/privacidad', [PrivacyController::class, 'index'])->name('privacy-policy.index');
+    Route::get('/cookies', [PrivacyController::class, 'cookies'])->name('cookies.index');
+    Route::get('/legal', [PrivacyController::class, 'legal'])->name('legal.index');
+    Route::get('/terminos', [PrivacyController::class, 'terms'])->name('terms.index');
 });
 
 // English
@@ -77,6 +86,10 @@ Route::prefix('en')->group(function () {
     Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/privacidad', [PrivacyController::class, 'index'])->name('privacy-policy.index');
+    Route::get('/cookies', [PrivacyController::class, 'cookies'])->name('cookies.index');
+    Route::get('/legal', [PrivacyController::class, 'legal'])->name('legal.index');
+    Route::get('/terminos', [PrivacyController::class, 'terms'])->name('terms.index');
 });
 
 

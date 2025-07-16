@@ -76,8 +76,18 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
 
           <ul class="space-y-2">
             <li>
-              <a href="/privacidad" class="text-sm text-gray-600 hover:text-emerald-600">
+              <a :href="currentLang === 'ca' ? '/ca/privacidad' : currentLang === 'en' ? '/en/privacidad' : '/privacidad'" class="text-sm text-gray-600 hover:text-emerald-600">
                 {{ currentLang === 'ca' ? 'Política de Privacitat' : currentLang === 'en' ? 'Privacy Policy' : 'Política de Privacidad' }}
+              </a>
+            </li>
+            <li>
+              <a :href="currentLang === 'ca' ? '/ca/cookies' : currentLang === 'en' ? '/en/cookies' : '/cookies'" class="text-sm text-gray-600 hover:text-emerald-600">
+                {{ currentLang === 'ca' ? 'Política de Cookies' : currentLang === 'en' ? 'Cookies Policy' : 'Política de Cookies' }}
+              </a>
+            </li>
+            <li>
+              <a :href="currentLang === 'ca' ? '/ca/legal' : currentLang === 'en' ? '/en/legal' : '/legal'" class="text-sm text-gray-600 hover:text-emerald-600">
+                {{ currentLang === 'ca' ? 'Avís Legal' : currentLang === 'en' ? 'Legal Notice' : 'Aviso Legal' }}
               </a>
             </li>
             <li>

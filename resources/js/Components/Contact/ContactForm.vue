@@ -108,6 +108,34 @@
                 ></textarea>
               </div>
 
+              <!-- Privacy Policy Consent -->
+              <div class="flex items-start gap-2 text-sm text-gray-700">
+                <input
+                  v-model="consent"
+                  type="checkbox"
+                  id="privacy"
+                  required
+                  class="mt-1 border-gray-300 rounded focus:ring-emerald-500"
+                />
+                <label for="privacy" class="cursor-pointer">
+                  <template v-if="currentLang === 'ca'">
+                    Abans de continuar, has de llegir i acceptar la nostra <a href="/ca/privacidad" target="_blank" class="text-emerald-600 underline">política de privacitat</a>.
+                  </template>
+                  <template v-else-if="currentLang === 'en'">
+                    Before continuing, you must read and accept our <a href="/en/privacidad" target="_blank" class="text-emerald-600 underline">privacy policy</a>.
+                  </template>
+                  <template v-else>
+                    Antes de continuar, debes leer y aceptar nuestra <a href="/privacidad" target="_blank" class="text-emerald-600 underline">política de privacidad</a>.
+                  </template>
+                </label>
+              </div>
+
+              <p v-if="error" class="text-red-600 mt-4">
+                {{ 
+                    currentLang === 'ca' ? 'Has d\'acceptar el consentiment abans de continuar.' : currentLang === 'en' ? 'You must accept the consent before continuing.' : 'Debes aceptar el consentimiento antes de continuar.'
+                }}
+              </p>
+
               <!-- Submit Button -->
               <button
                 type="submit"
@@ -259,8 +287,14 @@ const form = useForm({
 
 const isSubmitting = ref(false)
 const showSuccess = ref(false)
+const consent = ref(false)
+const error = ref(false)
 
 function submit() {
+  if (!consent.value) {
+    error.value = true
+    return
+  }
   isSubmitting.value = true
   form.post('/contact', {
     onSuccess: () => {
