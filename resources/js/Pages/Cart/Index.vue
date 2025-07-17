@@ -294,6 +294,7 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
@@ -301,6 +302,7 @@ import { ref, computed } from 'vue'
 import { Head, Link, router } from '@inertiajs/vue3'
 import { Trash2, ArrowLeft } from 'lucide-vue-next'
 import Navbar from '@/Components/Navbar.vue'
+import Footer from '@/Components/Footer.vue'
 
 
 const props = defineProps({

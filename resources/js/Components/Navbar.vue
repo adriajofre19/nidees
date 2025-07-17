@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { ShoppingCart, Menu, X, UserRound } from 'lucide-vue-next'
 import { Link } from '@inertiajs/vue3'
+import Logo from './Logo.vue'
 
 // Mobile & user menu
 const mobileMenuOpen = ref(false)
@@ -46,8 +47,8 @@ const changeLanguage = (langOrEvent) => {
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <!-- Logo -->
       <a :href="currentLang === 'ca' ? '/ca' : currentLang === 'en' ? '/en' : '/'" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="/images/logo.png" class="h-10" alt="Logo 1" />
-        <img src="/images/logo2.png" class="h-8" alt="Logo 2" />
+        <img src="/images/logo.webp" class="h-12" alt="Logo 1" />
+        <img src="/images/logo2.webp" class="h-8" alt="Logo 2" />
       </a>
 
       <!-- Botones derecha -->
@@ -61,8 +62,8 @@ const changeLanguage = (langOrEvent) => {
             >
             <div>
               <img
-                :src="currentLang === 'es' ? '/images/spain.png' : currentLang === 'ca' ? '/images/catalonia.webp' : '/images/reino-unido.png'"
-                alt=""
+                :src="currentLang === 'es' ? '/images/spain.webp' : currentLang === 'ca' ? '/images/catalonia.webp' : '/images/reino-unido.webp'"
+                alt="Idioma"
                 class="inline-block w-6 h-6"
               />
               
@@ -84,19 +85,19 @@ const changeLanguage = (langOrEvent) => {
             >
               <li>
                 <button @click="changeLanguage('es')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">
-                  <img src="/images/spain.png" alt="" class="inline-block mr-2 w-4 h-4" />
+                  <img src="/images/spain.webp" alt="Español" class="inline-block mr-2 w-4 h-4" />
                   Español
                 </button>
               </li>
               <li>
                 <button @click="changeLanguage('en')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">
-                  <img src="/images/reino-unido.png" alt="" class="inline-block mr-2 w-4 h-4" />
+                  <img src="/images/reino-unido.webp" alt="English" class="inline-block mr-2 w-4 h-4" />
                   English
                 </button>
               </li>
               <li>
                 <button @click="changeLanguage('ca')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">
-                  <img src="/images/catalonia.webp" alt="" class="inline-block mr-2 w-4 h-4" />
+                  <img src="/images/catalonia.webp" alt="Català" class="inline-block mr-2 w-4 h-4" />
                   Català
                 </button>
               </li>
@@ -111,8 +112,8 @@ const changeLanguage = (langOrEvent) => {
             >
             <div>
               <img
-                :src="currentLang === 'es' ? '/images/spain.png' : currentLang === 'ca' ? '/images/catalonia.webp' : '/images/reino-unido.png'"
-                alt=""
+                :src="currentLang === 'es' ? '/images/spain.webp' : currentLang === 'ca' ? '/images/catalonia.webp' : '/images/reino-unido.webp'"
+                alt="Idioma"
                 class="inline-block mr-2 w-4 h-4"
               />
               {{ currentLang.toUpperCase() === 'ES' ? 'Español' : currentLang.toUpperCase() === 'CA' ? 'Català' : 'English' }}
@@ -134,19 +135,19 @@ const changeLanguage = (langOrEvent) => {
             >
               <li>
                 <button @click="changeLanguage('es')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">
-                  <img src="/images/spain.png" alt="" class="inline-block mr-2 w-4 h-4" />
+                  <img src="/images/spain.webp" alt="Español" class="inline-block mr-2 w-4 h-4" />
                   Español
                 </button>
               </li>
               <li>
                 <button @click="changeLanguage('en')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">
-                  <img src="/images/reino-unido.png" alt="" class="inline-block mr-2 w-4 h-4" />
+                  <img src="/images/reino-unido.webp" alt="English" class="inline-block mr-2 w-4 h-4" />
                   English
                 </button>
               </li>
               <li>
                 <button @click="changeLanguage('ca')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">
-                  <img src="/images/catalonia.webp" alt="" class="inline-block mr-2 w-4 h-4" />
+                  <img src="/images/catalonia.webp" alt="Català" class="inline-block mr-2 w-4 h-4" />
                   Català
                 </button>
               </li>

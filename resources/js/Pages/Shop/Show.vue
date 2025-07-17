@@ -105,10 +105,10 @@
             <div class="mt-6 sm:mt-8">
               <button
                 @click="addToCart(product.id)"
-                :disabled="isAddingToCart"
+                :disabled="isAddingToCart[product.id]"
                 class="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-xl hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
               >
-                <span v-if="isAddingToCart" class="flex items-center justify-center">
+                <span v-if="isAddingToCart[product.id]" class="flex items-center justify-center">
                   <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -159,7 +159,7 @@
                   v-for="(img, idx) in related.images"
                   :key="img.id || idx"
                   :src="`/public/${img.path}`"
-                  :alt="related.name"
+                  :alt="`${related.name} - Imatge relacionada`"
                   class="object-cover w-full h-full absolute inset-0 transition-opacity duration-500"
                   :style="{ opacity: (activeImageIndexes[related.id] || 0) === idx ? 1 : 0 }"
                 />
@@ -207,6 +207,24 @@
                 </span>
               </div>
             </div>
+            <button
+            type="button"
+              @click.stop.prevent="addToCart(related.id)"
+              :disabled="isAddingToCart[related.id]"
+                class="w-full mt-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-md hover:from-emerald-700 hover:to-emerald-800 transform transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
+              >
+                <span v-if="isAddingToCart[related.id]" class="flex items-center justify-center">
+                  <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  {{ currentLang === 'ca' ? 'Afegint...' : currentLang === 'en' ? 'Adding...' : 'Añadiendo...' }}
+                </span>
+                <span v-else class="flex items-center justify-center">
+                  <ShoppingCart class="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
+                  {{ currentLang === 'ca' ? 'Afegir a la cistella' : currentLang === 'en' ? 'Add to cart' : 'Añadir a la cesta' }}
+                </span>
+              </button> 
           </Link>
         </div>
       </div>
@@ -216,7 +234,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, defineProps, onMounted, onBeforeUnmount, reactive } from 'vue'
 import { Link, Head, router } from '@inertiajs/vue3'
 import Navbar from '@/Components/Navbar.vue'
 import Footer from '@/Components/Footer.vue'
@@ -231,7 +249,7 @@ const props = defineProps({
 const images = props.product.images?.map(img => `/public/${img.path}`) || []
 const selectedImage = ref(images[0] || '/placeholder.jpg')
 const currentImageIndex = ref(0)
-const isAddingToCart = ref(false)
+const isAddingToCart = reactive({})
 const activeImageIndexes = ref({})
 const intervals = ref({})
 
@@ -293,16 +311,32 @@ function stopImageCycle(productId) {
 
 // Añadir al carrito
 function addToCart(productId) {
-  isAddingToCart.value = true
+  isAddingToCart[productId] = true
   
   router.post(route('cart.add'), { product_id: productId }, {
     preserveScroll: true,
     onSuccess: () => {
-      isAddingToCart.value = false
+      isAddingToCart[productId] = false
       // Opcional: mostrar notificación de éxito
     },
     onError: () => {
-      isAddingToCart.value = false
+      isAddingToCart[productId] = false
+      // Opcional: mostrar notificación de error
+    }
+  })
+}
+
+function addToCartRelated(productId) {
+  isAddingToCartRelated.value = true
+  
+  router.post(route('cart.add'), { product_id: productId }, {
+    preserveScroll: true,
+    onSuccess: () => {
+      isAddingToCartRelated.value = false
+      // Opcional: mostrar notificación de éxito
+    },
+    onError: () => {
+      isAddingToCartRelated.value = false
       // Opcional: mostrar notificación de error
     }
   })

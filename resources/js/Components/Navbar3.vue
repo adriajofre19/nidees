@@ -37,8 +37,8 @@ const changeLanguage = (event) => {
     <div class="h-20 px-6 md:px-32 flex items-center justify-between">
       <!-- Logo -->
       <div class="flex items-center gap-4">
-        <img src="/images/logo.png" alt="Logo" class="h-11 w-auto" />
-        <img src="/images/logo2.png" alt="Logo" class="h-8 w-auto hidden sm:block" />
+        <img src="/images/logo.webp" alt="Logo" class="h-11 w-auto" />
+        <img src="/images/logo2.webp" alt="Logo" class="h-8 w-auto hidden sm:block" />
       </div>
 
       <!-- Desktop Menu -->

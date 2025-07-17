@@ -68,13 +68,13 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
       {{ currentLang === 'ca' ? '4. Legislació aplicable' : currentLang === 'en' ? '4. Applicable Law' : '4. Legislación aplicable' }}
     </h2>
     <p v-if="currentLang === 'ca'" class="mb-4">
-      Aquests termes i condicions es regeixen per la legislació espanyola. Per a qualsevol disputa, les parts se sotmetran als jutjats i tribunals de [ciutat].
+      Aquests termes i condicions es regeixen per la legislació espanyola. Per a qualsevol disputa, les parts se sotmetran als jutjats i tribunals de Girona.
     </p>
     <p v-else-if="currentLang === 'en'" class="mb-4">
-      These terms and conditions are governed by Spanish law. In case of any dispute, the parties will submit to the courts of [city].
+      These terms and conditions are governed by Spanish law. In case of any dispute, the parties will submit to the courts of Girona.
     </p>
     <p v-else class="mb-4">
-      Estos términos y condiciones se rigen por la legislación española. Para cualquier disputa, las partes se someterán a los juzgados y tribunales de [ciudad].
+      Estos términos y condiciones se rigen por la legislación española. Para cualquier disputa, las partes se someterán a los juzgados y tribunales de Girona.
     </p>
 
     <p class="mt-8 text-sm text-gray-500">

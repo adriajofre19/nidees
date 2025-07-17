@@ -25,9 +25,9 @@
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-3 gap-12">
+      <div class="grid lg:grid-cols-3 gap-12 ">
         <!-- Contact Form -->
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-2 form-section">
           <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-xl border border-white/20">
             <form @submit.prevent="submit" class="space-y-8">
               <!-- Name Field -->
@@ -183,7 +183,7 @@
         </div>
 
         <!-- Contact Information Sidebar -->
-        <div class="lg:col-span-1">
+        <div class="lg:col-span-1 contacts-section">
           <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-3xl p-8 text-white shadow-xl">
             <h2 class="text-2xl font-light mb-8">
               {{ currentLang === 'ca' ? 'Informació de contacte' : currentLang === 'en' ? 'Contact information' : 'Información de contacto' }}
@@ -274,6 +274,33 @@
 import { ref, reactive } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { Send, Instagram } from 'lucide-vue-next'
+import { gsap } from "gsap";
+import { onMounted, watch, nextTick } from 'vue';
+
+
+onMounted(async () => {
+  await nextTick()
+
+  const tl = gsap.timeline({
+    defaults: {
+      duration: 1,       // Duración constante
+      ease: 'power2.out' // Suavidad uniforme (ni muy lenta ni muy brusca)
+    }
+  })
+
+  tl.fromTo(
+    '.form-section',
+    { x: '-100%', opacity: 0 },
+    { x: '0', opacity: 1 }
+  )
+
+  tl.fromTo(
+    '.contacts-section',
+    { x: '100%', opacity: 0 },
+    { x: '0', opacity: 1 }
+  )
+})
+
 
 const pathParts = window.location.pathname.split('/')
 const currentLang = ref(['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es')

@@ -147,7 +147,7 @@ onUnmounted(() => {
         <div class="flex justify-center items-center max-w-4xl mx-auto mb-6">
   <span v-if="currentLang === 'ca'" class="text-gray-600 text-center text-lg leading-snug">
     A 
-    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.png" alt="NiDEES logo" />
+    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.webp" alt="NiDEES logo" />
     recuperem plàstics i materials per crear peces úniques,
     <br>reduint els residus i contribuint a un món més respectuós amb el planeta.
     <br>Cada producte és una acció cap a un món més sostenible.
@@ -155,7 +155,7 @@ onUnmounted(() => {
 
   <span v-else-if="currentLang === 'es'" class="text-gray-600 text-center text-lg leading-snug">
     En 
-    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.png" alt="NiDEES logo" />
+    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.webp" alt="NiDEES logo" />
     recuperamos plásticos y materiales para crear piezas únicas,
     <br>reduciendo los residuos y contribuyendo a un mundo más respetuoso con el planeta.
     <br>Cada producto es una acción hacia un mundo más sostenible.
@@ -163,7 +163,7 @@ onUnmounted(() => {
 
   <span v-else class="text-gray-600 text-center text-lg leading-snug">
     At 
-    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.png" alt="NiDEES logo" />
+    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.webp" alt="NiDEES logo" />
     we recover plastics and materials to create unique pieces,
     <br>reducing waste and contributing to a planet-friendly world.
     <br>Each product is a step toward a more sustainable future.

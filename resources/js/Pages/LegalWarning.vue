@@ -42,13 +42,13 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
       {{ currentLang === 'ca' ? '2. Propietat intel·lectual' : currentLang === 'en' ? '2. Intellectual Property' : '2. Propiedad intelectual' }}
     </h2>
     <p v-if="currentLang === 'ca'" class="mb-4">
-      Tots els continguts del lloc web (textos, imatges, logotips, dissenys, codi font...) estan protegits per drets de propietat intel·lectual i industrial, i són titularitat de [Nom o empresa].
+      Tots els continguts del lloc web (textos, imatges, logotips, dissenys, codi font...) estan protegits per drets de propietat intel·lectual i industrial, i són titularitat de nidees.
     </p>
     <p v-else-if="currentLang === 'en'" class="mb-4">
-      All content on the website (texts, images, logos, designs, source code...) is protected by intellectual and industrial property rights and is owned by [Name or company].
+      All content on the website (texts, images, logos, designs, source code...) is protected by intellectual and industrial property rights and is owned by nidees.
     </p>
     <p v-else class="mb-4">
-      Todos los contenidos del sitio web (textos, imágenes, logotipos, diseños, código fuente...) están protegidos por derechos de propiedad intelectual e industrial, y son titularidad de [Nombre o empresa].
+      Todos los contenidos del sitio web (textos, imágenes, logotipos, diseños, código fuente...) están protegidos por derechos de propiedad intelectual e industrial, y son titularidad de nidees.
     </p>
 
     <h2 class="text-xl font-semibold mt-6 mb-2">
@@ -68,13 +68,13 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
       {{ currentLang === 'ca' ? '4. Legislació aplicable' : currentLang === 'en' ? '4. Applicable Law' : '4. Legislación aplicable' }}
     </h2>
     <p v-if="currentLang === 'ca'" class="mb-4">
-      Aquest avís legal es regeix per la legislació espanyola. Per a qualsevol conflicte que pugui sorgir, les parts se sotmetran als jutjats i tribunals de [ciutat].
+      Aquest avís legal es regeix per la legislació espanyola. Per a qualsevol conflicte que pugui sorgir, les parts se sotmetran als jutjats i tribunals de Girona.
     </p>
     <p v-else-if="currentLang === 'en'" class="mb-4">
-      This legal notice is governed by Spanish law. For any conflict that may arise, the parties shall submit to the courts of [city].
+      This legal notice is governed by Spanish law. For any conflict that may arise, the parties shall submit to the courts of Girona.
     </p>
     <p v-else class="mb-4">
-      Este aviso legal se rige por la legislación española. Para cualquier conflicto que pueda surgir, las partes se someterán a los juzgados y tribunales de [ciudad].
+      Este aviso legal se rige por la legislación española. Para cualquier conflicto que pueda surgir, las partes se someterán a los juzgados y tribunales de Girona.
     </p>
 
     <p class="mt-8 text-sm text-gray-500">

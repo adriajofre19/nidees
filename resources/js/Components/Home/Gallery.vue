@@ -1,9 +1,9 @@
 <template>
   <div class="max-w-6xl mx-auto py-10 px-4">
-    <div>
+    <div class="gallery">
       <template v-for="(row, rowIndex) in rows" :key="rowIndex">
         <div
-          :class="[
+          :class="[ 
             'flex flex-wrap gap-4 mb-4',
             row.length === 1 ? 'justify-center' : '',
             row.length === 2 ? 'justify-center' : '',
@@ -14,7 +14,7 @@
             :href="currentLang === 'ca' ? `/ca/shop/${product.slug}` : currentLang === 'en' ? `/en/shop/${product.slug}` : `/shop/${product.slug}`"
             v-for="product in row"
             :key="product.id"
-            class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition flex-1 basis-full sm:basis-[48%] md:basis-[30%] max-w-full sm:max-w-[48%] md:max-w-[32%]"
+            class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition flex-1 basis-full sm:basis-[48%] md:basis-[30%] max-w-full sm:max-w-[48%] md:max-w-[32%] product-item opacity-0 transform translate-y-5"
           >
             <div class="w-full aspect-[4/3] flex items-center justify-center bg-gray-100">
               <img
@@ -40,9 +40,11 @@
 </template>
 
 
+
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, nextTick } from 'vue'
 import { Link } from '@inertiajs/vue3'
+import { gsap } from 'gsap'
 
 const props = defineProps({
   products: {
@@ -71,7 +73,20 @@ const rows = computed(() => {
 const supportedLangs = ['ca', 'en']
 const pathParts = window.location.pathname.split('/')
 const currentLang = ref(supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es')
-</script>
 
-<style scoped>
-</style>
+// ANIMACIÓ
+onMounted(async () => {
+  await nextTick()
+
+  gsap.to('.product-item', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: {
+      each: 0.1,
+      from: 'start'
+    }
+  })
+})
+</script>

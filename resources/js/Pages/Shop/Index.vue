@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, reactive } from 'vue'
 import Navbar from '@/Components/Navbar.vue'
 import { Link, Head, router } from '@inertiajs/vue3'
 import { ShoppingCart } from 'lucide-vue-next'
@@ -10,9 +10,28 @@ const props = defineProps({
   user: Array
 })
 
+import { onMounted, nextTick } from 'vue'
+import gsap from 'gsap'
+
+onMounted(async () => {
+  await nextTick() // Espera a que el DOM se renderice
+  gsap.from('.product-card', {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    ease: 'power2.out',
+    stagger: {
+      each: 0.15,
+      from: 'start'
+    }
+  })
+})
+
+
+
 const activeImageIndexes = ref({})
 const intervals = ref({})
-const isAddingToCart = ref(false)
+const isAddingToCart = reactive({})
 
 function setActiveImage(productId, idx) {
   activeImageIndexes.value[productId] = idx
@@ -42,13 +61,14 @@ function stopImageCycle(productId) {
 
 // Añadir al carrito
 function addToCart(productId) {
+  isAddingToCart[productId] = true
   router.post(route('cart.add'), { product_id: productId }, {
     preserveScroll: true,
     onSuccess: () => {
-      isAddingToCart.value = false
+      isAddingToCart[productId] = false
     },
     onBefore: () => {
-      isAddingToCart.value = true
+      isAddingToCart[productId] = true
     }
   })
 }
@@ -69,11 +89,11 @@ const currentLang = supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es'
     <h1 class="text-3xl font-bold mb-8">
       {{ currentLang === 'ca' ? 'Productes' : currentLang === 'en' ? 'Products' : 'Productos' }}
     </h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 product-card">
       <Link
         v-for="product in products"
         :key="product.id"
-        class="transition overflow-hidden flex flex-col group"
+        class=" transition overflow-hidden flex flex-col group"
         :href="currentLang === 'ca' ? `/ca/shop/${product.slug}` : currentLang === 'en' ? `/en/shop/${product.slug}` : `/shop/${product.slug}`"
       >
         <div
@@ -101,22 +121,22 @@ const currentLang = supportedLangs.includes(pathParts[1]) ? pathParts[1] : 'es'
 
           <button
             type="button"
-              @click.stop.prevent="addToCart(product.id)"
-              :disabled="isAddingToCart"
-                class="w-full mt-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-md hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
-              >
-                <span v-if="isAddingToCart" class="flex items-center justify-center">
-                  <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  {{ currentLang === 'ca' ? 'Afegint...' : currentLang === 'en' ? 'Adding...' : 'Añadiendo...' }}
-                </span>
-                <span v-else class="flex items-center justify-center">
-                  <ShoppingCart class="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
-                  {{ currentLang === 'ca' ? 'Afegir a la cistella' : currentLang === 'en' ? 'Add to cart' : 'Añadir a la cesta' }}
-                </span>
-              </button>  
+            @click.stop.prevent="addToCart(product.id)"
+            :disabled="isAddingToCart[product.id]"
+            class="w-full mt-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-md hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
+          >
+            <span v-if="isAddingToCart[product.id]" class="flex items-center justify-center">
+              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              {{ currentLang === 'ca' ? 'Afegint...' : currentLang === 'en' ? 'Adding...' : 'Añadiendo...' }}
+            </span>
+            <span v-else class="flex items-center justify-center">
+              <ShoppingCart class="w-4 h-4 sm:w-6 sm:h-6 mr-2" />
+              {{ currentLang === 'ca' ? 'Afegir a la cistella' : currentLang === 'en' ? 'Add to cart' : 'Añadir a la cesta' }}
+            </span>
+          </button> 
         </div>
       </Link>
     </div>

@@ -12,7 +12,7 @@
 <template>
     <Head :title="currentLang === 'ca' ? 'Contacte' : currentLang === 'en' ? 'Contact' : 'Contacto'" />
     <Navbar />
-    <div class="mt-16 bg-[url(/images/phone.png)] w-full h-[640px] bg-cover bg-center relative flex items-center justify-center">
+    <div class="mt-16 bg-[url(/images/phone.webp)] w-full h-[640px] bg-cover bg-center relative flex items-center justify-center">
         <div class="text-center max-w-2xl px-6">
         <h2 class="text-2xl md:text-3xl font-medium text-gray-800 mb-4 leading-relaxed">
             {{ 
