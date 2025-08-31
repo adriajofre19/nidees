@@ -8,7 +8,8 @@ import FiresSection from '@/Components/Nosotros/FiresSection.vue';
 import ImpactSection from '@/Components/Nosotros/ImpactSection.vue';
 
 const props = defineProps({
-    fires: Array
+    fires: Array,
+    numbers: Array
 });
 
 const pathParts = window.location.pathname.split('/')
@@ -21,7 +22,7 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
   <Head :title="currentLang === 'ca' ? 'Nosaltres' : currentLang === 'en' ? 'Us' : 'Nosotros'" />
   <HeaderSection />
   <FiresSection :fires="props.fires" />
-  <ImpactSection />
+  <ImpactSection :numbers="props.numbers" />
   <Footer />
 </template>
 

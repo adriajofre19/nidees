@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { Recycle, Hammer, MapPin, Leaf, Heart, ShieldCheck } from 'lucide-vue-next';
+import MapPin from '@/Components/Mappin.vue';
+import Rotate from '@/Components/Rotate.vue';
+import Hand from '@/Components/Hand.vue';
+
 
 // Detectar idioma desde la URL
 const pathParts = window.location.pathname.split('/');
@@ -10,101 +13,57 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es';
 const featuresByLang = {
   ca: [
     {
-      icon: Recycle,
-      title: "Producte Reciclat",
-      description: "Transformem bosses de plàstic en peces úniques, donant una segona vida als residus i reduint l'impacte ambiental."
+      icon: Rotate,
+      title: "Plàstics Reciclats",
+      description: "Donem nova vida als plàtic. Transformem bosses, embalatges, malles de vegetals en complements únics, funcionals i artístics."
     },
     {
-      icon: Hammer,
-      title: "Artesania Local",
-      description: "Cada peça és elaborada a mà amb cura i dedicació, assegurant la màxima qualitat i atenció als detalls."
+      icon: Hand,
+      title: "Fet a mà",
+      description: "Cada peça és una obra única, feta a mà amb cura i passió. Funcionalitat i bellesa van de la mà."
     },
     {
       icon: MapPin,
-      title: "Fet a Girona",
-      description: "Som una empresa local compromesa amb el desenvolupament sostenible de la nostra comunitat."
-    },
-    {
-      icon: Leaf,
-      title: "Moda Sostenible",
-      description: "Creem moda ètica i sostenible que respecta el medi ambient sense renunciar a l'estil i la funcionalitat."
-    },
-    {
-      icon: Heart,
-      title: "Disseny Únic",
-      description: "Cada producte és únic i irrepetible, amb dissenys exclusius que reflecteixen la nostra passió per l'artesania."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Qualitat Garantida",
-      description: "Assegurem la màxima qualitat en tots els nostres productes, amb materials duradors i acabats impecables."
+      title: "Producció local",
+      description: "Disseny i producció 100% empordanesa. Treballem arrelats al territori, inspirats per la natura i la cultura local."
     }
   ],
   es: [
     {
-      icon: Recycle,
-      title: "Producto Reciclado",
-      description: "Transformamos bolsas de plástico en piezas únicas, dando una segunda vida a los residuos y reduciendo el impacto ambiental."
+      icon: Rotate,
+      title: "Plásticos Reciclados",
+      description: "Damos nueva vida al plástico. Transformamos bolsas, embalajes y mallas de vegetales en complementos únicos, funcionales y artísticos."
     },
     {
-      icon: Hammer,
-      title: "Artesanía Local",
-      description: "Cada pieza está hecha a mano con cuidado y dedicación, asegurando la máxima calidad y atención al detalle."
+      icon: Hand,
+      title: "Hecho a mano",
+      description: "Cada pieza es una obra única, hecha a mano con cuidado y pasión. Funcionalidad y belleza van de la mano."
     },
     {
       icon: MapPin,
-      title: "Hecho en Girona",
-      description: "Somos una empresa local comprometida con el desarrollo sostenible de nuestra comunidad."
-    },
-    {
-      icon: Leaf,
-      title: "Moda Sostenible",
-      description: "Creamos moda ética y sostenible que respeta el medio ambiente sin renunciar al estilo y la funcionalidad."
-    },
-    {
-      icon: Heart,
-      title: "Diseño Único",
-      description: "Cada producto es único e irrepetible, con diseños exclusivos que reflejan nuestra pasión por la artesanía."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Calidad Garantizada",
-      description: "Aseguramos la máxima calidad en todos nuestros productos, con materiales duraderos y acabados impecables."
+      title: "Producción local",
+      description: "Diseño y producción 100% ampurdanesa. Trabajamos arraigados al territorio, inspirados por la naturaleza y la cultura local."
     }
   ],
   en: [
     {
-      icon: Recycle,
-      title: "Recycled Product",
-      description: "We transform plastic bags into unique pieces, giving waste a second life and reducing environmental impact."
+      icon: Rotate,
+      title: "Recycled Plastics",
+      description: "We give new life to plastic. We transform bags, packaging, and vegetable nets into unique, functional, and artistic accessories."
     },
     {
-      icon: Hammer,
-      title: "Local Craftsmanship",
-      description: "Each piece is handcrafted with care and dedication, ensuring top quality and attention to detail."
+      icon: Hand,
+      title: "Handmade",
+      description: "Each piece is a unique creation, handmade with care and passion. Functionality and beauty go hand in hand."
     },
     {
       icon: MapPin,
-      title: "Made in Girona",
-      description: "We are a local company committed to the sustainable development of our community."
-    },
-    {
-      icon: Leaf,
-      title: "Sustainable Fashion",
-      description: "We create ethical and sustainable fashion that respects the environment without sacrificing style and functionality."
-    },
-    {
-      icon: Heart,
-      title: "Unique Design",
-      description: "Each product is one of a kind, with exclusive designs that reflect our passion for craftsmanship."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Guaranteed Quality",
-      description: "We ensure the highest quality in all our products, with durable materials and impeccable finishes."
+      title: "Local Production",
+      description: "100% Empordà design and production. We work rooted in the territory, inspired by nature and local culture."
     }
   ]
 };
+
 
 const selectedIndex = ref(0);
 const cardsPerView = ref(3);
@@ -147,7 +106,7 @@ onUnmounted(() => {
         <div class="flex justify-center items-center max-w-4xl mx-auto mb-6">
   <span v-if="currentLang === 'ca'" class="text-gray-600 text-center text-lg leading-snug">
     A 
-    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.webp" alt="NiDEES logo" />
+    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo_nidees.png" alt="NiDEES logo" />
     recuperem plàstics i materials per crear peces úniques,
     <br>reduint els residus i contribuint a un món més respectuós amb el planeta.
     <br>Cada producte és una acció cap a un món més sostenible.
@@ -155,7 +114,7 @@ onUnmounted(() => {
 
   <span v-else-if="currentLang === 'es'" class="text-gray-600 text-center text-lg leading-snug">
     En 
-    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.webp" alt="NiDEES logo" />
+    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo_nidees.png" alt="NiDEES logo" />
     recuperamos plásticos y materiales para crear piezas únicas,
     <br>reduciendo los residuos y contribuyendo a un mundo más respetuoso con el planeta.
     <br>Cada producto es una acción hacia un mundo más sostenible.
@@ -163,7 +122,7 @@ onUnmounted(() => {
 
   <span v-else class="text-gray-600 text-center text-lg leading-snug">
     At 
-    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo2.webp" alt="NiDEES logo" />
+    <img class="inline-block h-4 w-auto mb-1 align-middle" src="/images/logo_nidees.png" alt="NiDEES logo" />
     we recover plastics and materials to create unique pieces,
     <br>reducing waste and contributing to a planet-friendly world.
     <br>Each product is a step toward a more sustainable future.

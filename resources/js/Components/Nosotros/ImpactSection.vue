@@ -50,8 +50,18 @@
                 : 'Productos que viven<br>una segunda vida.'
             "></span>
 
+
+
           </div>
+          
         </div>
+        <button 
+                v-if="$page.props.auth.user && $page.props.auth.user.role === 'admin'"
+                @click="showModal = true"
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white text-lg font-semibold px-6 py-3 rounded-full transform transition-all duration-200 shadow-lg mb-12"
+              >
+                Canviar
+              </button>
       </div>
     </section>
 
@@ -93,16 +103,84 @@
       </div>
     </section>
   </div>
+
+  <!-- Modal -->
+  <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+        <transition name="fade">
+          <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative text-left m-4">
+            <h1 class="text-3xl font-bold mb-6 text-gray-900">Editar Impacte</h1>
+            <form @submit.prevent="submit" class="space-y-6">
+              <div>
+                <label for="bosses" class="block text-sm font-semibold text-gray-700 mb-2">Bosses Reciclades</label>
+                <input
+                  id="bosses"
+                  v-model="form.bags"
+                  type="number"
+                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                  placeholder="Bosses Reciclades"
+                />
+              </div>
+
+              <div>
+                <label for="second_life" class="block text-sm font-semibold text-gray-700 mb-2">Productes que viuen una segona vida</label>
+                <input
+                  id="second_life"
+                  v-model="form.second_life"
+                  type="number"
+                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+                  placeholder="Productes que viuen una segona vida"
+                />
+              </div>
+
+
+              
+              
+              
+              <div class="flex gap-3 pt-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50 transition-all duration-200"
+                  :disabled="processing"
+                >
+                  {{ processing ? 'Guardant...' : 'Guardar' }}
+                </button>
+                <button
+                  type="button"
+                  @click="showModal = false"
+                  class="flex-1 bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors"
+                >
+                  Cancel·lar
+                </button>
+              </div>
+            </form>
+          </div>
+        </transition>
+      </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+
+
+
+const showModal = ref(false);
+const processing = ref(false);
+
+const props = defineProps({
+    numbers: Array
+})
+
+const form = useForm({
+    bags: props.numbers[0].bags,
+    second_life: props.numbers[0].second_life,
+})
 
 const animatedBags = ref(0)
 const animatedProducts = ref(0)
 
-const targetBags = 13500
-const targetProducts = 2600
+const targetBags = props.numbers[0].bags
+const targetProducts = props.numbers[0].second_life
 
 // Animation function for counting up numbers
 const animateNumber = (target, current, setter, duration = 2000) => {
@@ -152,6 +230,24 @@ onMounted(() => {
 
 const pathParts = window.location.pathname.split('/')
 const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
+
+
+const submit = () => {
+  processing.value = true;
+  form.post(route('numbers.update'), {
+    forceFormData: true,
+    onError: (err) => {
+      errors.value = err;
+      processing.value = false;
+    },
+    onSuccess: () => {
+      processing.value = false;
+      showModal.value = false;
+      form.reset();
+      window.location.reload();
+    }
+  });
+};
 </script>
 
 <style scoped>

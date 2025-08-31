@@ -129,6 +129,16 @@ class ProductController extends Controller
     ]);
 }
 
+public function category(Category $category)
+{
+    $products = Product::where('category_id', $category->id)->get();
+    
+    return Inertia::render('Shop/Category', [
+        'products' => $products,
+        'category' => $category,
+    ]);
+}
+
 
     public function update(Request $request, Product $product)
 {

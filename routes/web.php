@@ -63,6 +63,8 @@ Route::get('/privacidad', [PrivacyController::class, 'index'])->name('privacy-po
 Route::get('/cookies', [PrivacyController::class, 'cookies'])->name('cookies.index');
 Route::get('/legal', [PrivacyController::class, 'legal'])->name('legal.index');
 Route::get('/terminos', [PrivacyController::class, 'terms'])->name('terms.index');
+Route::get('/category/{category}', [ProductController::class, 'category'])->name('category.show');
+
 
 // Catalan
 Route::prefix('ca')->group(function () {
@@ -76,6 +78,7 @@ Route::prefix('ca')->group(function () {
     Route::get('/cookies', [PrivacyController::class, 'cookies'])->name('cookies.index');
     Route::get('/legal', [PrivacyController::class, 'legal'])->name('legal.index');
     Route::get('/terminos', [PrivacyController::class, 'terms'])->name('terms.index');
+    Route::get('/category/{category}', [ProductController::class, 'category'])->name('category.show');
 });
 
 // English
@@ -90,6 +93,7 @@ Route::prefix('en')->group(function () {
     Route::get('/cookies', [PrivacyController::class, 'cookies'])->name('cookies.index');
     Route::get('/legal', [PrivacyController::class, 'legal'])->name('legal.index');
     Route::get('/terminos', [PrivacyController::class, 'terms'])->name('terms.index');
+    Route::get('/category/{category}', [ProductController::class, 'category'])->name('category.show');
 });
 
 
@@ -120,12 +124,15 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
 
 Route::get('/shop/{product}', [ProductController::class, 'product'])->name('product.show');
+Route::get('/category/{category}', [ProductController::class, 'category'])->name('category.show');
+
 
 Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/increment/{cartItem}', [CartController::class, 'increment'])->name('cart.increment');
 Route::post('/cart/decrement/{cartItem}', [CartController::class, 'decrement'])->name('cart.decrement');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::post('/numbers', [FiraController::class, 'update'])->name('numbers.update');
 
 
 require __DIR__.'/auth.php';

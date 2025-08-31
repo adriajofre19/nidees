@@ -7,7 +7,7 @@
           <div class="relative">
             <div class="absolute inset-0 bg-gradient-to-tr from-emerald-600 to-emerald-700 rounded-2xl transform rotate-3"></div>
             <img 
-              src="/images/tienda.webp" 
+              src="/images/parada.png" 
               :alt="currentLang === 'ca' ? 'Parada de productes NiDEES' : currentLang === 'es' ? 'Puesto de productos NiDEES' : 'NiDEES product booth'" 
               class="relative rounded-2xl shadow-2xl w-full h-auto object-cover transform -rotate-1 hover:rotate-0 transition-transform duration-300"
             />
@@ -73,7 +73,7 @@
                 <p class="text-lg font-medium text-gray-800">
                   I així va néixer l'aventura de 
                   <img 
-                    src="/images/logo2.webp" 
+                    src="/images/logo_nidees.png" 
                     alt="nidees logo" 
                     class="inline-block h-4 w-auto mx-1 align-middle"
                   />: 
@@ -140,7 +140,7 @@
       <p class="text-lg font-medium text-gray-800">
         Y así nació la aventura de 
         <img 
-          src="/images/logo2.webp" 
+          src="/images/logo_nidees.png" 
           alt="logo nidees" 
           class="inline-block h-4 w-auto mx-1 align-middle"
         />: 
@@ -208,7 +208,7 @@
       <p class="text-lg font-medium text-gray-800">
         And that’s how the adventure of 
         <img 
-          src="/images/logo2.webp" 
+          src="/images/logo_nidees.png" 
           alt="nidees logo" 
           class="inline-block h-4 w-auto mx-1 align-middle"
         /> began: 

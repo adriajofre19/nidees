@@ -25,30 +25,34 @@ const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
     <HeaderSection  />
     <!-- Español -->
     <div v-if="currentLang === 'es'" class="flex flex-col items-center justify-center text-center p-8">
-      <span class="text-2xl">
+      <span class="text-xl lg:text-5xl">
         Diseño sostenible con <strong>plásticos reciclados.</strong> <br>
-        Piezas únicas hechas a mano, combinando arte y funcionalidad.
+        <span class="text-lg lg:text-4xl">
+          Piezas únicas hechas a mano, combinando arte y funcionalidad.
+        </span>
       </span>
     </div>
 
     <!-- Catalán -->
     <div v-if="currentLang === 'ca'" class="flex flex-col items-center justify-center text-center p-8">
-      <span class="text-2xl">
+      <span class="text-xl lg:text-5xl">
         Disseny sostenible amb <strong>plàstics reciclats.</strong> <br>
-        Peçes úniques fetes a mà, combinant art i funcionalitat.
+        <span class="text-lg lg:text-4xl">
+          Peçes úniques fetes a mà, combinant art i funcionalitat.
+        </span>
       </span>
     </div>
 
     <!-- Inglés -->
     <div v-if="currentLang === 'en'" class="flex flex-col items-center justify-center text-center p-8">
-      <span class="text-2xl">
+      <span class="text-xl lg:text-5xl">
         Sustainable design with <strong>recycled plastics.</strong> <br>
         Unique handmade pieces, combining art and functionality.
       </span>
     </div>
 
     <FeaturesSection/>
-    <Gallery :products="props.products" />
+    <Gallery :products="props.products" :categories="props.categories" />
     <FooterSeaction />
  
     <Footer />

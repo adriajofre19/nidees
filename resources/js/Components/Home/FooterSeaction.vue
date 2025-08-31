@@ -1,58 +1,48 @@
 <script setup>
-  const pathParts = window.location.pathname.split('/')
-  const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
+const pathParts = window.location.pathname.split('/')
+const currentLang = ['ca', 'en'].includes(pathParts[1]) ? pathParts[1] : 'es'
 
+// Traducciones
+const texts = {
+  es: {
+    title: "En cada compra estás contribuyendo en un mundo más sostenible.",
+    subtitle: "Únete a",
+    suffix: "y hagamos posible el cambio."
+  },
+  ca: {
+    title: "En cada compra estàs contribuint en un món més sostenible.",
+    subtitle: "Uneix-te a",
+    suffix: "i fem possible el canvi."
+  },
+  en: {
+    title: "With every purchase you contribute to a more sustainable world.",
+    subtitle: "Join",
+    suffix: "and let’s make change possible."
+  }
+}
 </script>
+
 <template>
-  <div class="w-full aspect-[4/3] sm:aspect-[16/5] md:aspect-[3.2/1] bg-gray-100 relative overflow-hidden">
-    
-    <!-- Fons per mòbil -->
-    <div class="absolute inset-0 block md:hidden">
-        <!-- Imagen de fondo -->
-        <div
-          class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style="background-image: url('/images/bags2.webp')"
-        ></div>
-        
-        <!-- Capa blanca con opacidad -->
-        <div class="absolute inset-0 bg-white opacity-40"></div>
-      </div>
+  <section 
+    class="relative bg-white bg-cover bg-center min-h-screen flex items-start justify-center"
+    style="background-image: url('/images/bags2.webp');"
+  >
 
-    <!-- Fons per escriptori -->
-    <div class="absolute inset-0 hidden md:block">
-  <!-- Imagen de fondo -->
-  <div 
-    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-    style="background-image: url('/images/bags.webp')"
-  ></div>
+    <!-- Texto -->
+    <div class="relative z-10 text-center max-w-6xl px-4 sm:px-6 lg:px-8 pt-16 md:pt-24">
+      <h2 class="text-lg sm:text-xl md:text-3xl font-semibold text-gray-800 leading-relaxed">
+        {{ texts[currentLang].title }}
+      </h2>
 
-  <!-- Capa blanca con opacidad -->
-  <div class="absolute inset-0 bg-white opacity-40"></div>
-</div>
-
-    <!-- Contingut -->
-    <div class="relative z-10 flex flex-col items-center justify-center h-full px-4 py-6">
-      <div class="text-center space-y-3 max-w-6xl">
-        <h1 class="text-gray-800 text-base sm:text-lg md:text-2xl lg:text-3xl xl:text-3xl font-medium leading-snug">
-          {{ currentLang === 'ca' ? 'En cada compra estàs contribuint en un món més sostenible.' : 
-          currentLang === 'en' ? 'In every purchase you are contributing to a more sustainable world.' : 
-          'En cada compra estas contribuyendo a un mundo más sostenible.' }}
-        </h1>
-
-        <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-          <span class="text-gray-800 text-base sm:text-lg md:text-2xl lg:text-3xl font-medium">
-            {{ currentLang === 'ca' ? 'Uneix-te a' : currentLang === 'en' ? 'Join us' : 'Unete a' }}
-          </span>
-          <img 
-            src="/images/logo2.webp" 
-            alt="Logo" 
-            class="h-4 sm:h-6 md:h-7 lg:h-5 xl:h-5 w-auto" 
-          />
-          <span class="text-gray-800 text-base sm:text-lg md:text-2xl lg:text-3xl font-medium">
-            {{ currentLang === 'ca' ? 'i fem possible el canvi.' : currentLang === 'en' ? 'and we make possible the change.' : 'y hagamos posible el cambio.' }}
-          </span>
-        </div>
-      </div>
+      <p class="mt-3 text-base sm:text-xl md:text-2xl font-medium text-gray-700 flex flex-wrap items-center justify-center gap-2">
+        {{ texts[currentLang].subtitle }}
+        <img 
+          src="/images/logo_nidees.png" 
+          alt="Logo NiDEES" 
+          class="h-5 sm:h-5 md:h-5 inline-block"
+        />
+        {{ texts[currentLang].suffix }}
+      </p>
     </div>
-  </div>
+  </section>
 </template>

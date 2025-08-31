@@ -91,7 +91,7 @@ const t = translations[currentLang]
             <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-3/5">
                 <div class="flex-1">
                     <div class="text-center">
-                        <img src="/images/logo2.webp" alt="Logo" class="h-10 mx-auto mb-4">
+                        <img src="/images/logo_nidees.png" alt="Logo" class="h-10 mx-auto mb-4">
                         <p class="mt-3 text-gray-500">{{ t.subtitle }}</p>
                     </div>
 

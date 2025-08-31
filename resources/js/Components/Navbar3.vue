@@ -38,7 +38,7 @@ const changeLanguage = (event) => {
       <!-- Logo -->
       <div class="flex items-center gap-4">
         <img src="/images/logo.webp" alt="Logo" class="h-11 w-auto" />
-        <img src="/images/logo2.webp" alt="Logo" class="h-8 w-auto hidden sm:block" />
+        <img src="/images/logo_nidees.png" alt="Logo" class="h-8 w-auto hidden sm:block" />
       </div>
 
       <!-- Desktop Menu -->

@@ -11,16 +11,16 @@
           ]"
         >
           <Link 
-            :href="currentLang === 'ca' ? `/ca/shop/${product.slug}` : currentLang === 'en' ? `/en/shop/${product.slug}` : `/shop/${product.slug}`"
-            v-for="product in row"
-            :key="product.id"
+            :href="currentLang === 'ca' ? `/ca/category/${category.slug}` : currentLang === 'en' ? `/en/category/${category.slug}` : `/category/${category.slug}`"
+            v-for="category in row"
+            :key="category.id"
             class="relative group rounded-lg overflow-hidden shadow hover:shadow-lg transition flex-1 basis-full sm:basis-[48%] md:basis-[30%] max-w-full sm:max-w-[48%] md:max-w-[32%] product-item opacity-0 transform translate-y-5"
           >
             <div class="w-full aspect-[4/3] flex items-center justify-center bg-gray-100">
               <img
-                v-if="product.images[0]"
-                :src="`/public/${product.images[0].path}`"
-                :alt="product.name"
+                v-if="category.image"
+                :src="`/public/${category.image}`"
+                :alt="category.name"
                 class="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-60"
               />
               <span v-else class="text-gray-400">Sense imatge</span>
@@ -28,7 +28,7 @@
                 class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-70"
               >
                 <span class="text-white text-xl font-bold text-center px-2">
-                  {{ product.name }}
+                  {{ category.name }}
                 </span>
               </div>
             </div>
@@ -50,6 +50,10 @@ const props = defineProps({
   products: {
     type: Array,
     required: true
+  },
+  categories: {
+    type: Array,
+    required: true
   }
 })
 
@@ -60,10 +64,21 @@ const rows = computed(() => {
   const result = []
   let i = 0
   let p = 0
-  const products = props.products
+  
+  /*const products = props.products
   while (i < products.length) {
     const count = pattern[p % pattern.length]
     result.push(products.slice(i, i + count))
+    i += count
+    p++
+  }
+  return result
+  */
+
+  const categories = props.categories
+  while (i < categories.length) {
+    const count = pattern[p % pattern.length]
+    result.push(categories.slice(i, i + count))
     i += count
     p++
   }

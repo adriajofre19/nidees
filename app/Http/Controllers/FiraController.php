@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Fire;
+use App\Models\Number;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,9 +14,11 @@ class FiraController extends Controller
     public function index(Request $request)
     {
         $fires = Fire::all(); 
+        $numbers = Number::all();
 
         return Inertia::render('Nosotros', [
             'fires' => $fires,
+            'numbers' => $numbers,
         ]);
     }
 
@@ -58,6 +61,22 @@ class FiraController extends Controller
 
         // Eliminar el registro de Fira
         $fire->delete();
+
+        return redirect()->route('nosotros.index');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'bags' => 'required|numeric',
+            'second_life' => 'required|numeric',
+        ]);
+
+        $number = Number::first();
+        $number->update([
+            'bags' => $request->bags,
+            'second_life' => $request->second_life,
+        ]);
 
         return redirect()->route('nosotros.index');
     }

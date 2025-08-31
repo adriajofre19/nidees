@@ -48,7 +48,7 @@ const changeLanguage = (langOrEvent) => {
       <!-- Logo -->
       <a :href="currentLang === 'ca' ? '/ca' : currentLang === 'en' ? '/en' : '/'" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="/images/logo.webp" class="h-12" alt="Logo 1" />
-        <img src="/images/logo2.webp" class="h-8" alt="Logo 2" />
+        <img src="/images/logo_nidees.png" class="h-8" alt="Logo 2" />
       </a>
 
       <!-- Botones derecha -->
